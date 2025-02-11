@@ -6,20 +6,18 @@ import 'package:lingerie_store_project/ui/widgets/home/list_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 
-BrandColors brandColors = BrandColors();
-
 Widget homePage(BuildContext context) {
   return MaterialApp(
       title: 'Velora',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-            seedColor: Color(brandColors.brandPastelPurple1)),
+            seedColor: Color(BrandColors.brandPastelPurple1.value)),
         useMaterial3: true,
         textTheme: GoogleFonts.notoSerifOttomanSiyaqTextTheme(),
       ),
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: Color(brandColors.appBarColor),
+          backgroundColor: Color(BrandColors.appBarColor.value),
           centerTitle: true,
           title: Text('Velora Lingerie Shop'),
         ),
@@ -30,18 +28,14 @@ Widget homePage(BuildContext context) {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: [
-                Color(brandColors.brandPastelPurple1),
-                Color(brandColors.brandPastelBlue)
+                Color(BrandColors.brandPastelPurple1.value),
+                Color(BrandColors.brandPastelBlue.value)
               ])),
           child: customListView(context, products),
         ),
-        // floatingActionButton: FloatingActionButton(
-        //   child: Icon(Icons.add_shopping_cart),
-        //   onPressed: () => {log('Button pressed: add_shopping_cart')},
-        // ),
         bottomNavigationBar: homeButtonNavigationBar(context),
-        floatingActionButton:
-            homeFloatingActionButton(context, brandColors.brandPastelPurple2),
+        floatingActionButton: homeFloatingActionButton(
+            context, BrandColors.brandPastelPurple2.value),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       ));
 }

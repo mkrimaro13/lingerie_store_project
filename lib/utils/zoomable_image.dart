@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 
-class _ZoomableImageState extends State<ZoomableImage>
+class ZoomableImageState extends State<ZoomableImage>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
@@ -32,8 +32,9 @@ class _ZoomableImageState extends State<ZoomableImage>
       scale: _animation,
       child: InteractiveViewer(
         panEnabled: true,
-        minScale: 1.0,
-        maxScale: 3.0, // Max zoom level
+        minScale: 1.0, // Zoom mínimo, por defecto al hacer zoom.
+        maxScale:
+            2.0, // Zoom máximo, cuando se hace zoom, se puede seguir haciendo un "pequeño" zoom, que es esta escala adicional.
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10.0),
           child: Image.network(widget.imageUrl),
@@ -51,7 +52,7 @@ class ZoomableImage extends StatefulWidget {
       {super.key, required this.productName, required this.imageUrl});
 
   @override
-  _ZoomableImageState createState() => _ZoomableImageState();
+  ZoomableImageState createState() => ZoomableImageState();
 }
 
 // Function to show zoomable image with animation
