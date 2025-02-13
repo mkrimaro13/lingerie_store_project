@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:lingerie_store_project/layout/colors.dart';
 
@@ -9,7 +11,12 @@ Widget mobileButtonNavigationBar(BuildContext context) {
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        IconButton(icon: Icon(Icons.home_rounded), onPressed: () {}),
+        IconButton(
+            icon: Icon(Icons.home_rounded),
+            onPressed: () {
+              log('button pressed');
+              Navigator.pushNamed(context, '/Home');
+            }),
         IconButton(icon: Icon(Icons.favorite_rounded), onPressed: () {}),
         SizedBox(width: 40), // Space for FAB
         IconButton(icon: Icon(Icons.shopping_cart_rounded), onPressed: () {}),
