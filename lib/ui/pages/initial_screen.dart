@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:lingerie_store_project/layout/main_layout.dart';
 
 class InitialScreen extends StatelessWidget {
   const InitialScreen({super.key});
