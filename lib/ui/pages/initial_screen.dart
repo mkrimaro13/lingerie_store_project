@@ -7,31 +7,33 @@ class InitialScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        ClipRRect(
-          child: InkWell(
-            onTap: () {
-              log('Logo clicked');
-            },
-            child: Image.asset(
-              'lib/images/logo.png',
-              fit: BoxFit.cover,
+    return Container(
+        color: Color(0xFFFFFFFF),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ClipRRect(
+              child: InkWell(
+                onTap: () {
+                  log('Logo clicked');
+                },
+                child: Image.asset(
+                  'lib/images/logo.png',
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
-          ),
-        ),
-        SizedBox(
-          height: 50,
-        ),
-        ElevatedButton(
-            onPressed: () {
-              log('button pressed');
-              Navigator.pushNamed(context, '/Products');
-            },
-            child: Text('Go to Products View'))
-      ],
-    );
+            SizedBox(
+              height: 50,
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  log('button pressed');
+                  Navigator.pushNamed(context, '/Products');
+                },
+                child: Text('Go to Products View'))
+          ],
+        ));
   }
 }

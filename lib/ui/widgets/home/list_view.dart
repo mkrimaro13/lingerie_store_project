@@ -4,6 +4,7 @@ import 'package:lingerie_store_project/ui/widgets/product_card.dart';
 
 Widget customListView(BuildContext context, List<ProductModel> products) {
   return GridView.builder(
+      physics: BouncingScrollPhysics(),
       // Adds padding around the entire ListView.
       padding: EdgeInsets.all(8.0),
       // Sets the scroll direction. Use Axis.horizontal for horizontal scrolling.
@@ -17,6 +18,20 @@ Widget customListView(BuildContext context, List<ProductModel> products) {
       itemCount: products.length,
       itemBuilder: (context, index) =>
           ProductCard(product: products[index]).build(context));
+}
+
+class CustomScrollBehavior extends ScrollBehavior {
+  @override
+  Widget buildViewportChrome(
+      BuildContext context, Widget child, AxisDirection axisDirection) {
+    return child;
+  }
+
+  @override
+  ScrollPhysics getScrollPhysics(BuildContext context) {
+    return const AlwaysScrollableScrollPhysics()
+        .applyTo(const BouncingScrollPhysics()); // Custom physics
+  }
 }
 
 int _getCrossAxisCount(BuildContext context) {

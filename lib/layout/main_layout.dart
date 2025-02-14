@@ -8,7 +8,8 @@ class MainLayout extends StatelessWidget {
   // final int currentIndex;
   // final Function(int) onTap;
 
-  const MainLayout({super.key, 
+  const MainLayout({
+    super.key,
     required this.child,
     // required this.currentIndex,
     // required this.onTap,
@@ -24,9 +25,9 @@ class MainLayout extends StatelessWidget {
       ),
       body: child,
       bottomNavigationBar: homeButtonNavigationBar(context),
-      floatingActionButton: homeFloatingActionButton(
-          context, BrandColors.brandPastelPurple2.value),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      // floatingActionButton: homeFloatingActionButton(
+      //     context, BrandColors.brandPastelPurple2.value),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.startDocked,
     );
   }
 }
