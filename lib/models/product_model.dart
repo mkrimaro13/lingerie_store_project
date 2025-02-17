@@ -1,3 +1,4 @@
+// DTO para el intercambio de información con fuentes externas
 class ProductModel {
   final String productImagePath;
   final String productName;

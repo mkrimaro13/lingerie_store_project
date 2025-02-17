@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:lingerie_store_project/models/product_model.dart';
 import 'package:lingerie_store_project/utils/zoomable_image.dart';
 
+/// Crea las [Card]s de cada producto.
+/// Las tarjetas en sí no cambian, su diseño es estático
 class ProductCard extends StatelessWidget {
   final ProductModel product;
 
@@ -13,18 +15,15 @@ class ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      // shape: RoundedRectangleBorder(
-      //   borderRadius: BorderRadius.circular(8.0), // Adjust the corner radius
-      // ),
       shape: BeveledRectangleBorder(
-        borderRadius: BorderRadius.circular(8.0), // Less rounded, more angled
+        borderRadius: BorderRadius.circular(5.0), // Less rounded, more angled
       ),
       shadowColor: Color(0xFFC4D9FF),
       color: Color(0xFFE8F9FF),
       borderOnForeground: false,
       // margin: EdgeInsets.only(bottom: 0.0), // No requiere margin interno ya que la propia lista está aplicando márgenes
       child: Padding(
-        padding: EdgeInsets.all(5.0),
+        padding: EdgeInsets.all(8.0),
         child: Column(
           spacing: 10,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -91,30 +90,30 @@ class ProductCard extends StatelessWidget {
       ),
     );
   }
-}
 
-double _getHeight(BuildContext context) {
-  double screenWidth = MediaQuery.of(context).size.width;
+  double _getHeight(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
 
-  switch (screenWidth) {
-    case < 600:
-      return 200;
-    case < 900:
-      return 210;
-    default:
-      return 215;
+    switch (screenWidth) {
+      case < 600:
+        return 190;
+      case < 900:
+        return 210;
+      default:
+        return 215;
+    }
   }
-}
 
-Widget _image(BuildContext context, imagePath) {
-  return ClipRRect(
-    borderRadius: BorderRadius.circular(8.0),
-    child: Image.network(
-      imagePath,
-      height: _getHeight(context),
-      width: double.infinity,
-      fit: BoxFit.cover,
-      filterQuality: FilterQuality.high,
-    ),
-  );
+  Widget _image(BuildContext context, imagePath) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(8.0),
+      child: Image.network(
+        imagePath,
+        height: _getHeight(context),
+        width: double.infinity,
+        fit: BoxFit.cover,
+        filterQuality: FilterQuality.high,
+      ),
+    );
+  }
 }
