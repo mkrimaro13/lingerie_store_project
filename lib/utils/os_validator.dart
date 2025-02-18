@@ -1,5 +1,9 @@
 import 'package:flutter/foundation.dart';
 
+
+/// Para futuras funcionalidades de Layout
+/// Se planeará validar si es web o el ancho de la
+/// pantalla.
 bool get isOnDesktopAndWeb =>
     kIsWeb ||
     switch (defaultTargetPlatform) {

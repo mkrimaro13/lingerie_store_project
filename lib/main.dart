@@ -7,6 +7,10 @@ void main() {
   runApp(const LingerieStore());
 }
 
+/// Punto principal de la aplicación.
+/// No requiere almacenar estados ya que simplemente
+/// brinda el estilo general de la aplicación e
+/// inicia el [Widget] principal.
 class LingerieStore extends StatelessWidget {
   const LingerieStore({super.key});
 

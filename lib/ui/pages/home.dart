@@ -17,24 +17,20 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Material(
-        color: BrandColors.transparent.value,
-        child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FadeInAnimation(
-                  milliseconds: 1000,
-                  child: ClipRRect(
-                    child: InkWell(
-                      onTap: () {
-                        log('Logo clicked');
-                      },
-                      child: Image.asset(
-                        'lib/images/logo.png',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  )),
-            ]));
+      color: BrandColors.transparent.value,
+      child: FadeInAnimation(
+          milliseconds: 1000,
+          child: ClipRRect(
+            child: InkWell(
+              onTap: () {
+                log('Logo clicked');
+              },
+              child: Image.asset(
+                'lib/images/logo.png',
+                fit: BoxFit.fitWidth,
+              ),
+            ),
+          )),
+    );
   }
 }

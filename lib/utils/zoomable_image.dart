@@ -2,8 +2,25 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 
+/// Funcionalidad que permite realizar Zoom a las imágenes.
+
+// Function to show zoomable image with animation
+void showZoomableImage(
+    BuildContext context, String productName, String imageUrl) {
+  log('Zooming $productName');
+  showDialog(
+    context: context,
+    builder: (context) => Dialog(
+      backgroundColor: Colors.transparent,
+      child: ZoomableImage(productName: productName, imageUrl: imageUrl),
+    ),
+  );
+}
+
 class ZoomableImageState extends State<ZoomableImage>
     with SingleTickerProviderStateMixin {
+  /// Se crea una [AnimationController] para controlar el efecto
+  /// y la animación.
   late AnimationController _controller;
   late Animation<double> _animation;
 
@@ -53,17 +70,4 @@ class ZoomableImage extends StatefulWidget {
 
   @override
   ZoomableImageState createState() => ZoomableImageState();
-}
-
-// Function to show zoomable image with animation
-void showZoomableImage(
-    BuildContext context, String productName, String imageUrl) {
-  log('Zooming $productName');
-  showDialog(
-    context: context,
-    builder: (context) => Dialog(
-      backgroundColor: Colors.transparent,
-      child: ZoomableImage(productName: productName, imageUrl: imageUrl),
-    ),
-  );
 }

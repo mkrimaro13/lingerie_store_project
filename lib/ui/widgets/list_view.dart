@@ -28,7 +28,7 @@ class ProductsGridView extends StatelessWidget {
             /// Aplica una animación de aparición gradual o desvanecimiento de entrada
             /// a su [Widget] hijo.
             FadeInAnimation(
-              milliseconds: 2200,
+              milliseconds: 1000,
               child: SizedBox(
                   height: double.infinity,
 
