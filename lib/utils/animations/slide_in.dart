@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+/// Animación de desplazamiento desde la parte inferior
 class SlideFromBottom extends StatefulWidget {
   final Widget child;
   final double? beginOffsetY;

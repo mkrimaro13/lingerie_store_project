@@ -1,12 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:lingerie_store_project/models/product_model.dart';
-import 'package:lingerie_store_project/ui/widgets/product_card.dart';
+import 'package:lingerie_store_project/ui/widgets/product_card_grid_view.dart';
 import 'package:lingerie_store_project/utils/animations/fade_in.dart';
 
-class ProductsGridView extends StatelessWidget {
+class ProductsGridView extends StatefulWidget {
   final List<ProductModel> products;
+  const ProductsGridView({
+    super.key,
+    required this.products,
+  });
 
-  const ProductsGridView({super.key, required this.products});
+  @override
+  State<ProductsGridView> createState() => _ProductsGridView();
+}
+
+class _ProductsGridView extends State<ProductsGridView> {
+  // void _toggle(int index) {
+  //   if (widget.isSelectionMode) {
+  //     setState(() {
+  //       widget.selectedList[index] = !widget.selectedList[index];
+  //     });
+  //   }
+  // }
+
   @override
   Widget build(BuildContext context) {
     // El builder sirve para cargar elementos de forma dinámica, será útil para integrar el API, si se carga solo.
@@ -33,7 +49,7 @@ class ProductsGridView extends StatelessWidget {
                   height: double.infinity,
 
                   /// Llama al objeto que crea las tarjetas de cada producto.
-                  child: ProductCard(product: products[index])),
+                  child: ProductCardGridView(product: products[index])),
             ));
   }
 }

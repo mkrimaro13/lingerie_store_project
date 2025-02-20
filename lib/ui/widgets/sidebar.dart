@@ -29,7 +29,7 @@ class _CustomSideBar extends State<CustomSideBar> {
         children: [
           DrawerHeader(
             decoration: BoxDecoration(
-              color: BrandColors.transparent.value,
+              color: BrandColors.pastelPurple.value,
               image: DecorationImage(
                 image: AssetImage('lib/images/logo.png'),
                 fit: BoxFit.cover,

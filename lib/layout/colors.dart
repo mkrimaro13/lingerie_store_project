@@ -5,11 +5,10 @@ enum BrandColors {
   transparent(
     Color.fromARGB(0, 255, 255, 255),
   ),
-  appBarColor(Color(0xFFFFEDFA)),
-  brandPastelPurple1(Color(0xFFC5BAFF)),
-  brandPastelBlue(Color(0xFFC4D9FF)),
-  brandPastelPurple2(Color(0xFFC5BAFF)),
-  brandPastelPurple3(Color(0xFFFCC6FF));
+  white(Color.fromRGBO(251, 251, 251, 1)),
+  pastelPurple(Color(0xFFC5BAFF)),
+  whitePurple(Color(0xffF5EFFF)),
+  pastelBlue(Color(0xFFC4D9FF));
 
   final Color value;
   const BrandColors(this.value);

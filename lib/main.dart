@@ -20,10 +20,15 @@ class LingerieStore extends StatelessWidget {
       title: 'Velora',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-            seedColor: BrandColors.brandPastelPurple1.value),
+            seedColor: BrandColors.white.value, brightness: Brightness.light),
         useMaterial3: true,
         textTheme: GoogleFonts.notoSerifOttomanSiyaqTextTheme(),
       ),
+      // darkTheme: ThemeData(
+      //     colorScheme: ColorScheme.fromSeed(
+      //   seedColor: Colors.black87,
+      //   brightness: Brightness.dark,
+      // ).copyWith(surface: Colors.grey[850]!)),
       debugShowCheckedModeBanner: false,
       home: HomeScreen(),
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// Animación de desvanecimiento.
 class FadeInAnimation extends StatefulWidget {
   final Widget child;
   final int? milliseconds;

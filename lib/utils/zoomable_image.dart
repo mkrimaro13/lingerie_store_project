@@ -3,8 +3,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 
 /// Funcionalidad que permite realizar Zoom a las imágenes.
-
-// Function to show zoomable image with animation
 void showZoomableImage(
     BuildContext context, String productName, String imageUrl) {
   log('Zooming $productName');
@@ -15,6 +13,15 @@ void showZoomableImage(
       child: ZoomableImage(productName: productName, imageUrl: imageUrl),
     ),
   );
+}
+class ZoomableImage extends StatefulWidget {
+  final String imageUrl;
+  final String productName;
+  const ZoomableImage(
+      {super.key, required this.productName, required this.imageUrl});
+
+  @override
+  ZoomableImageState createState() => ZoomableImageState();
 }
 
 class ZoomableImageState extends State<ZoomableImage>
@@ -29,12 +36,13 @@ class ZoomableImageState extends State<ZoomableImage>
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 300), // Animation duration
+      duration: Duration(milliseconds: 300),
     );
     _animation = Tween<double>(begin: 0.1, end: 1.0).animate(
       CurvedAnimation(parent: _controller, curve: Curves.easeOut),
     );
-    _controller.forward(); // Start animation
+    /// Instrucción del controlador para iniciar la animación
+    _controller.forward();
   }
 
   @override
@@ -59,15 +67,4 @@ class ZoomableImageState extends State<ZoomableImage>
       ),
     );
   }
-}
-
-// Widget for the zoom animation
-class ZoomableImage extends StatefulWidget {
-  final String imageUrl;
-  final String productName;
-  const ZoomableImage(
-      {super.key, required this.productName, required this.imageUrl});
-
-  @override
-  ZoomableImageState createState() => ZoomableImageState();
 }
