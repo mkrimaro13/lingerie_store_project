@@ -20,6 +20,7 @@ class _ProductsListView extends State<ProductsListView> {
         physics: BouncingScrollPhysics(),
         scrollDirection: Axis.vertical,
         padding: EdgeInsets.all(8.0),
+        itemCount: products.length,
         itemBuilder: (context, index) =>
 
             /// Función que itera sobre cada elemento
