@@ -5,7 +5,7 @@ import 'package:lingerie_store_project/layout/colors.dart';
 import 'package:lingerie_store_project/models/product_model.dart';
 import 'package:lingerie_store_project/utils/images/load_image.dart';
 import 'package:lingerie_store_project/utils/images/mediaquery_measures.dart';
-import 'package:lingerie_store_project/utils/zoomable_image.dart';
+import 'package:lingerie_store_project/utils/images/zoomable_image.dart';
 
 /// Crea las [Card]s de cada producto.
 /// Las tarjetas en sí no cambian, su diseño es estático

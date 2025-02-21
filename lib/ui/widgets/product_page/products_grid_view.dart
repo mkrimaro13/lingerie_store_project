@@ -35,7 +35,7 @@ class _ProductsGridView extends State<ProductsGridView> {
           crossAxisCount: _getCrossAxisCount(context), // Cantidad de columnas
           crossAxisSpacing: 2, // Espacio entre columnas
           mainAxisSpacing: 2, // Espacio entre filas
-          childAspectRatio: 0.75, // Ajusta la relación Alto-Ancho
+          childAspectRatio: 0.7, // Ajusta la relación Alto-Ancho
         ),
         itemCount: products.length, // Cantidad de elementos a cargar.
         itemBuilder: (context, index) =>

@@ -6,7 +6,7 @@ double getHeight(BuildContext context) {
 
   switch (screenWidth) {
     case <= 370:
-      return 160;
+      return 150;
     case <= 400:
       return 170;
     case <= 500:
@@ -19,6 +19,7 @@ double getHeight(BuildContext context) {
       return 215;
   }
 }
+
 /// Método para calcular el ancho de acuerdo al ancho de la pantalla del contexto.
 double getWidth(BuildContext context) {
   double screenWidth = MediaQuery.of(context).size.width;
@@ -40,6 +41,7 @@ double getWidth(BuildContext context) {
       return 215;
   }
 }
+
 /// Método para calcular el espaciado de acuerdo al ancho de la pantalla del contexto
 double getSpacing(BuildContext context) {
   double screenWidth = MediaQuery.of(context).size.width;

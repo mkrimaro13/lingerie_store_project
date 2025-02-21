@@ -22,8 +22,8 @@ class _ImageLoader extends State<ImageLoader> {
       child: CachedNetworkImage(
         imageUrl: widget.imagePath,
         fit: BoxFit.cover,
-        height: widget.height ?? getWidth(context),
-        width: widget.width ?? getHeight(context),
+        height: widget.height ?? getHeight(context),
+        width: widget.width ?? getWidth(context),
         imageBuilder: (context, imageProvider) => Container(
           decoration: BoxDecoration(
             image: DecorationImage(
