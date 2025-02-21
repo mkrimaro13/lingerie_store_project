@@ -1,4 +1,4 @@
-import 'package:lingerie_store_project/layout/colors.dart';
+import 'package:lingerie_store_project/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:lingerie_store_project/ui/pages/home.dart';
 import 'package:lingerie_store_project/ui/pages/products.dart';

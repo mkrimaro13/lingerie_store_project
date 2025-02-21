@@ -1,6 +1,6 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:lingerie_store_project/layout/colors.dart';
+import 'package:lingerie_store_project/utils/colors.dart';
 import 'package:lingerie_store_project/models/product_model.dart';
 import 'package:lingerie_store_project/utils/images/load_image.dart';
 import 'package:lingerie_store_project/utils/images/mediaquery_measures.dart';

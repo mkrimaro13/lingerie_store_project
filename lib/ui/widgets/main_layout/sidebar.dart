@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:lingerie_store_project/layout/colors.dart';
+import 'package:lingerie_store_project/utils/colors.dart';
 
 class CustomSideBar extends StatefulWidget {
   const CustomSideBar({super.key});

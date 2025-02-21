@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:lingerie_store_project/layout/colors.dart';
+import 'package:lingerie_store_project/utils/colors.dart';
 import 'package:lingerie_store_project/utils/images/mediaquery_measures.dart';
 
 class ImageLoader extends StatefulWidget {

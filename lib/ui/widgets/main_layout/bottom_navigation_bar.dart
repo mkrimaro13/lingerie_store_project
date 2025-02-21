@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lingerie_store_project/layout/colors.dart';
+import 'package:lingerie_store_project/utils/colors.dart';
 
 /// La barra inferior es dinámica.
 /// Primero debe ser persistente, aunque suene contradictorio, en toda la aplicación.

@@ -15,13 +15,6 @@ class ProductsGridView extends StatefulWidget {
 }
 
 class _ProductsGridView extends State<ProductsGridView> {
-  // void _toggle(int index) {
-  //   if (widget.isSelectionMode) {
-  //     setState(() {
-  //       widget.selectedList[index] = !widget.selectedList[index];
-  //     });
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
