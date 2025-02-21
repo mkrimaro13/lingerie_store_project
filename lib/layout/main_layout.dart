@@ -2,8 +2,8 @@ import 'package:lingerie_store_project/layout/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:lingerie_store_project/ui/pages/home.dart';
 import 'package:lingerie_store_project/ui/pages/products.dart';
-import 'package:lingerie_store_project/ui/widgets/bottom_navigation_bar.dart';
-import 'package:lingerie_store_project/ui/widgets/sidebar.dart';
+import 'package:lingerie_store_project/ui/widgets/main_layout/bottom_navigation_bar.dart';
+import 'package:lingerie_store_project/ui/widgets/main_layout/sidebar.dart';
 
 /// Se crea la vista dinámica para poder utilizar el [BottomNavigationBar] de forma estática.
 /// Esto para que tenga botones, y entre los botones permita cambiar entre vistas.
@@ -47,7 +47,10 @@ class _MainScreenState extends State<HomeScreen> {
                 // Función de búsqueda.
               },
             ),
-            IconButton(tooltip: 'Cambiar la iluminación de la aplicación',onPressed: () {}, icon: Icon(Icons.dark_mode_rounded)),
+            IconButton(
+                tooltip: 'Cambiar la iluminación de la aplicación',
+                onPressed: () {},
+                icon: Icon(Icons.dark_mode_rounded)),
           ],
         ),
         drawer: Drawer(

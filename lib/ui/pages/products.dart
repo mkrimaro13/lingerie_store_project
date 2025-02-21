@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lingerie_store_project/layout/colors.dart';
 import 'package:lingerie_store_project/models/product_model.dart';
-import 'package:lingerie_store_project/ui/widgets/products_grid_view.dart';
-import 'package:lingerie_store_project/ui/widgets/products_list_view.dart';
+import 'package:lingerie_store_project/ui/widgets/product_page/products_grid_view.dart';
+import 'package:lingerie_store_project/ui/widgets/product_page/products_list_view.dart';
 
 /// Vista dinámica que muestra la lista de los productos disponibles.
 /// Se puede cambiar entre [GridView] y [ListView] para mostrarlo como cuadrícula

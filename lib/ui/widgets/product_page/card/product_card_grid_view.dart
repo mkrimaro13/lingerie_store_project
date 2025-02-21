@@ -3,6 +3,8 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:lingerie_store_project/layout/colors.dart';
 import 'package:lingerie_store_project/models/product_model.dart';
+import 'package:lingerie_store_project/utils/images/load_image.dart';
+import 'package:lingerie_store_project/utils/images/mediaquery_measures.dart';
 import 'package:lingerie_store_project/utils/zoomable_image.dart';
 
 /// Crea las [Card]s de cada producto.
@@ -24,12 +26,12 @@ class _ProductCardGridView extends State<ProductCardGridView> {
         borderRadius: BorderRadius.circular(8.0),
       ),
       elevation: 1,
-      shadowColor: BrandColors.pastelPurple.value,
+      shadowColor: BrandColors.whitePurple.value,
       borderOnForeground: false,
       child: Padding(
         padding: EdgeInsets.all(8.0),
         child: Column(
-          spacing: _getSpacing(context),
+          spacing: getSpacing(context),
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             /// Para darle acciones al tocar la foto, un toque, o pulsación larga.
@@ -40,7 +42,9 @@ class _ProductCardGridView extends State<ProductCardGridView> {
                   showZoomableImage(context, widget.product.productName,
                       widget.product.productImagePath);
                 },
-                child: _image(context, widget.product.productImagePath)),
+                child: ImageLoader(
+                  imagePath: widget.product.productImagePath,
+                )),
             Row(
               children: [
                 // Aquí es mejor usar Expanded para asignar el ancho (width) a los elementos y que lo compartan, y no tener que hacerlo manual y se superpongan
@@ -65,64 +69,20 @@ class _ProductCardGridView extends State<ProductCardGridView> {
                     softWrap: true,
                   ),
                 ),
-                IconButton(
-                    onPressed: () =>
-                        log('Added ${widget.product.productName} to cart'),
-                    icon: Icon(Icons.add_shopping_cart_rounded))
+                Ink(
+                  decoration: ShapeDecoration(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(15))),
+                      color: Color(0xffE5D9F2)),
+                  child: IconButton(
+                      onPressed: () =>
+                          log('Added ${widget.product.productName} to cart'),
+                      icon: Icon(Icons.add_shopping_cart_rounded)),
+                )
               ],
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  /// Método para calcular el alto de acuerdo al ancho de la pantalla del contexto.
-  double _getHeight(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-
-    switch (screenWidth) {
-      case <= 370:
-        return 160;
-      case <= 400:
-        return 170;
-      case <= 500:
-        return 190;
-      case <= 800:
-        return 220;
-      case <= 900:
-        return 210;
-      default:
-        return 215;
-    }
-  }
-
-  /// Método para calcular el espaciado de acuerdo al ancho de la pantalla del contexto.
-  double _getSpacing(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-
-    switch (screenWidth) {
-      case <= 370:
-        return 5;
-      case <= 400:
-        return 8;
-      case <= 800:
-        return 20;
-      default:
-        return 10;
-    }
-  }
-
-  /// Método para cargar la imagen y darle medidas personalizadas
-  Widget _image(BuildContext context, imagePath) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(8.0),
-      child: Image.network(
-        imagePath,
-        height: _getHeight(context),
-        width: double.infinity,
-        fit: BoxFit.cover,
-        filterQuality: FilterQuality.high,
       ),
     );
   }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lingerie_store_project/models/product_model.dart';
-import 'package:lingerie_store_project/ui/widgets/product_card_grid_view.dart';
+import 'package:lingerie_store_project/ui/widgets/product_page/card/product_card_grid_view.dart';
 import 'package:lingerie_store_project/utils/animations/fade_in.dart';
 
 class ProductsGridView extends StatefulWidget {
@@ -35,7 +35,7 @@ class _ProductsGridView extends State<ProductsGridView> {
           crossAxisCount: _getCrossAxisCount(context), // Cantidad de columnas
           crossAxisSpacing: 2, // Espacio entre columnas
           mainAxisSpacing: 2, // Espacio entre filas
-          childAspectRatio: 0.7, // Ajusta la relación Alto-Ancho
+          childAspectRatio: 0.75, // Ajusta la relación Alto-Ancho
         ),
         itemCount: products.length, // Cantidad de elementos a cargar.
         itemBuilder: (context, index) =>

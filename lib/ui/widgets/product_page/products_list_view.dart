@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lingerie_store_project/models/product_model.dart';
-import 'package:lingerie_store_project/ui/widgets/product_card_list_view.dart';
+import 'package:lingerie_store_project/ui/widgets/product_page/card/product_card_list_view.dart';
 import 'package:lingerie_store_project/utils/animations/fade_in.dart';
 
 class ProductsListView extends StatefulWidget {
