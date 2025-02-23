@@ -1,5 +1,22 @@
 import 'package:flutter/material.dart';
 
+// class MediaqueryMeasures {
+//   BuildContext context;
+//     double screenWidth = MediaQuery.of(context).size.width;
+
+// }
+
+double getPadding(BuildContext context) {
+  double screenWidth = MediaQuery.of(context).size.width;
+
+  switch (screenWidth) {
+    case > 900:
+      return 400;
+    default:
+      return 5;
+  }
+}
+
 /// Método para calcular el alto de acuerdo al ancho de la pantalla del contexto.
 double getHeight(BuildContext context) {
   double screenWidth = MediaQuery.of(context).size.width;

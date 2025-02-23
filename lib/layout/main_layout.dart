@@ -1,3 +1,4 @@
+import 'package:lingerie_store_project/ui/widgets/buttons/expandible_fab.dart';
 import 'package:lingerie_store_project/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:lingerie_store_project/ui/pages/home.dart';
@@ -88,10 +89,15 @@ class _MainScreenState extends State<HomeScreen> {
             onPageChanged: (index) => _onItemTapped(index),
           ),
         ),
-        bottomNavigationBar: CustomBottomNavigationBar(
+        floatingActionButton: ExpandableFab(
           selectedIndex: _selectedIndex,
           onItemTapped: _onItemTapped,
-        ));
+        )
+        // bottomNavigationBar: CustomBottomNavigationBar(
+        //   selectedIndex: _selectedIndex,
+        //   onItemTapped: _onItemTapped,
+        // )
+        );
   }
 
   /// [index] inicializado en 0.

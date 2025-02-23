@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:lingerie_store_project/ui/widgets/buttons/simplified_add_to_cart.dart';
 import 'package:lingerie_store_project/utils/colors.dart';
 import 'package:lingerie_store_project/models/product_model.dart';
 import 'package:lingerie_store_project/utils/images/load_image.dart';
@@ -21,6 +22,9 @@ class ProductCardGridView extends StatefulWidget {
 class _ProductCardGridView extends State<ProductCardGridView> {
   @override
   Widget build(BuildContext context) {
+    final imageWidget = ImageLoader(
+      imagePath: widget.product.productImagePath,
+    );
     return Card(
       shape: BeveledRectangleBorder(
         borderRadius: BorderRadius.circular(8.0),
@@ -36,15 +40,14 @@ class _ProductCardGridView extends State<ProductCardGridView> {
           children: [
             /// Para darle acciones al tocar la foto, un toque, o pulsación larga.
             GestureDetector(
-                onTap: () => log('Clicked ${widget.product.productName}'),
-                onLongPress: () {
-                  log('Long Pressed ${widget.product.productName}');
-                  showZoomableImage(context, widget.product.productName,
-                      widget.product.productImagePath);
-                },
-                child: ImageLoader(
-                  imagePath: widget.product.productImagePath,
-                )),
+              onTap: () => log('Clicked ${widget.product.productName}'),
+              onLongPress: () {
+                log('Long Pressed ${widget.product.productName}');
+                showZoomableImage(context, imageWidget);
+              },
+              child: imageWidget,
+            ),
+
             Row(
               children: [
                 // Aquí es mejor usar Expanded para asignar el ancho (width) a los elementos y que lo compartan, y no tener que hacerlo manual y se superpongan
@@ -69,16 +72,7 @@ class _ProductCardGridView extends State<ProductCardGridView> {
                     softWrap: true,
                   ),
                 ),
-                Ink(
-                  decoration: ShapeDecoration(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(15))),
-                      color: Color(0xffE5D9F2)),
-                  child: IconButton(
-                      onPressed: () =>
-                          log('Added ${widget.product.productName} to cart'),
-                      icon: Icon(Icons.add_shopping_cart_rounded)),
-                )
+                SimplifiedAddToCart()
               ],
             ),
           ],

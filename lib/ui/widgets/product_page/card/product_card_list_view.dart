@@ -19,6 +19,10 @@ class ProductCardListView extends StatefulWidget {
 class _ProductCardListView extends State<ProductCardListView> {
   @override
   Widget build(BuildContext context) {
+    ImageLoader imageLoaded = ImageLoader(
+      imagePath: widget.product.productImagePath,
+    );
+
     return Card(
       shape: BeveledRectangleBorder(
         borderRadius: BorderRadius.circular(8.0), // Less rounded, more angled
@@ -37,12 +41,9 @@ class _ProductCardListView extends State<ProductCardListView> {
                   onTap: () => log('Clicked ${widget.product.productName}'),
                   onLongPress: () {
                     log('Long Pressed ${widget.product.productName}');
-                    showZoomableImage(context, widget.product.productName,
-                        widget.product.productImagePath);
+                    showZoomableImage(context, imageLoaded);
                   },
-                  child: ImageLoader(
-                    imagePath: widget.product.productImagePath,
-                  )),
+                  child: imageLoaded),
 
               /// Para la [ListView] No se debe usar Expanded, en su lugar se coloca una [Column]
               /// Y se agregan los elementos necesarios.

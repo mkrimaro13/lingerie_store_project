@@ -1,24 +1,24 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 
 /// Funcionalidad que permite realizar Zoom a las imágenes.
-void showZoomableImage(
-    BuildContext context, String productName, String imageUrl) {
-  log('Zooming $productName');
+void showZoomableImage(BuildContext context, Widget image) {
   showDialog(
     context: context,
-    builder: (context) => Dialog(
+    builder: (_) => Dialog(
       backgroundColor: Colors.transparent,
-      child: ZoomableImage(productName: productName, imageUrl: imageUrl),
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width * 0.9,
+        height:
+            MediaQuery.of(context).size.height * 0.7, // 80% of screen height
+        child: ZoomableImage(image: image),
+      ),
     ),
   );
 }
+
 class ZoomableImage extends StatefulWidget {
-  final String imageUrl;
-  final String productName;
-  const ZoomableImage(
-      {super.key, required this.productName, required this.imageUrl});
+  final Widget image;
+  const ZoomableImage({super.key, required this.image});
 
   @override
   ZoomableImageState createState() => ZoomableImageState();
@@ -41,6 +41,7 @@ class ZoomableImageState extends State<ZoomableImage>
     _animation = Tween<double>(begin: 0.1, end: 1.0).animate(
       CurvedAnimation(parent: _controller, curve: Curves.easeOut),
     );
+
     /// Instrucción del controlador para iniciar la animación
     _controller.forward();
   }
@@ -59,10 +60,10 @@ class ZoomableImageState extends State<ZoomableImage>
         panEnabled: true,
         minScale: 1.0, // Zoom mínimo, por defecto al hacer zoom.
         maxScale:
-            2.0, // Zoom máximo, cuando se hace zoom, se puede seguir haciendo un "pequeño" zoom, que es esta escala adicional.
+            3.0, // Zoom máximo, cuando se hace zoom, se puede seguir haciendo un "pequeño" zoom, que es esta escala adicional.
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(10.0),
-          child: Image.network(widget.imageUrl),
+          borderRadius: BorderRadius.circular(15.0),
+          child: widget.image,
         ),
       ),
     );
