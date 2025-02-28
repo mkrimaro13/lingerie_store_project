@@ -37,7 +37,7 @@ class _ProductsGridView extends State<ProductsGridView> {
           mainAxisSpacing: 2, // Espacio entre filas
           childAspectRatio: 0.7, // Ajusta la relación Alto-Ancho
         ),
-        itemCount: products.length, // Cantidad de elementos a cargar.
+        itemCount: widget.products.length, // Cantidad de elementos a cargar.
         itemBuilder: (context, index) =>
 
             /// Función que itera sobre cada elemento
@@ -49,7 +49,7 @@ class _ProductsGridView extends State<ProductsGridView> {
                   height: double.infinity,
 
                   /// Llama al objeto que crea las tarjetas de cada producto.
-                  child: ProductCardGridView(product: products[index])),
+                  child: ProductCardGridView(product: widget.products[index])),
             ));
   }
 }

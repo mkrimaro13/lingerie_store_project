@@ -31,7 +31,7 @@ class _ProductsListView extends State<ProductsListView> {
                   width: double.infinity,
 
                   /// Llama al objeto que crea las tarjetas de cada producto.
-                  child: ProductCardListView(product: products[index])),
+                  child: ProductCardListView(product: widget.products[index])),
             ));
   }
 }

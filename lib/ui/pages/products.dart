@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:lingerie_store_project/layout/colors.dart';
 import 'package:lingerie_store_project/models/product_model.dart';
+import 'package:lingerie_store_project/services/api.dart';
 import 'package:lingerie_store_project/ui/widgets/products_grid_view.dart';
 import 'package:lingerie_store_project/ui/widgets/products_list_view.dart';
 
@@ -61,10 +64,26 @@ class _ProductsPage extends State<ProductsPage> {
           ),
         ],
       ),
+
       /// Cambio de vista.
-      body: _isGridView
-          ? ProductsGridView(products: products)
-          : ProductsListView(products: products),
+      body: FutureBuilder<List<ProductModel>>(
+        future: fetchProducts(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator()); // Loading state
+          } else if (snapshot.hasError) {
+            return Center(
+                child: Text('Error: ${snapshot.error}')); // Error state
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return Center(
+                child: Text('No products available')); // No data state
+          } else {
+            return _isGridView
+                ? ProductsGridView(products: snapshot.data!)
+                : ProductsListView(products: snapshot.data!); // Data loaded
+          }
+        },
+      ),
     );
   }
 }
