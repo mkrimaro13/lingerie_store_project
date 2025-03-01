@@ -1,69 +1,43 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:http/http.dart' as http;
-import 'package:collection/collection.dart';
 import 'package:lingerie_store_project/models/product_model.dart';
 
-// Future<List<ProductModel>> fetchProducts() async {
 Future<List<ProductModel>> fetchProducts() async {
-  final response =
-      // await http.get(Uri.parse('http://192.168.1.3:8080/products'));
-      await http.get(Uri.parse('http://localhost:8080/products'));
+  final uri = Uri.parse('http://localhost:8080/products/grouped');
 
-  if (response.statusCode == 200) {
-    final List<dynamic> data = jsonDecode(response.body);
+  try {
+    final response = await http.get(uri);
 
-    return data.map((row) {
-      return ProductModel(
-          productName: row["nombre"] ?? "No name",
-          productImagePath: row["enlaceImagen"] ?? "",
-          shortDescription: row["descripcion"] ?? "No description",
-          price: row["precio"] is int
-              ? row["precio"]
-              : int.tryParse(row["precio"].toString()) ?? 0,
-          size: row["talla"] ?? "N/A",
-          discount: row["descuento"] is int
-              ? row["descuento"]
-              : int.tryParse(row["descuento"].toString()) ?? 0,
-          availableUnits: row["unidadesDisponibles"] is int
-              ? row["unidadesDisponibles"]
-              : int.tryParse(row["unidadesDisponibles"].toString()) ?? 0);
-    }).toList();
-  } else {
-    throw Exception("Failed to fetch products");
-  }
-}
+    log("Status Code: ${response.statusCode}");
+    log("Response Body: ${response.body}");
 
-Future<Map<String, List<ProductModel>>> fetchAndGroupProductsByName() async {
-  final response = await http.get(Uri.parse('http://localhost:8080/products'));
+    if (response.statusCode == 200) {
+      final List<dynamic> data = jsonDecode(response.body);
 
-  if (response.statusCode == 200) {
-    final List<dynamic> data = jsonDecode(response.body);
-
-    // Parse the JSON data into a list of ProductModel instances
-    final products = data.map((row) {
-      return ProductModel(
-        productName: row["nombre"] ?? "No name",
-        productImagePath: row["enlaceImagen"] ?? "",
-        shortDescription: row["descripcion"] ?? "No description",
-        price: row["precio"] is int
-            ? row["precio"]
-            : int.tryParse(row["precio"].toString()) ?? 0,
-        size: row["talla"] ?? "N/A",
-        discount: row["descuento"] is int
-            ? row["descuento"]
-            : int.tryParse(row["descuento"].toString()) ?? 0,
-        availableUnits: row["unidadesDisponibles"] is int
-            ? row["unidadesDisponibles"]
-            : int.tryParse(row["unidadesDisponibles"].toString()) ?? 0,
-      );
-    }).toList();
-
-    // Group products by name using the groupBy function
-    final groupedByName =
-        groupBy(products, (ProductModel product) => product.productName);
-
-    return groupedByName;
-  } else {
-    throw Exception("Failed to fetch products");
+      return data.map((row) {
+        return ProductModel(
+          reference: row["id"] ?? 0,
+          productName: row["productName"] ?? "No name",
+          productImagePath: row["productImagePath"] ?? "",
+          price: row["price"] is int
+              ? row["price"]
+              : int.tryParse(row["price"].toString()) ?? 0,
+          sizesAndAvailability:
+              (row["sizesAndAvailability"] as Map<String, dynamic>?)?.map(
+                    (key, value) => MapEntry(key, value as int),
+                  ) ??
+                  {},
+          discount: row["discount"] is int
+              ? row["discount"]
+              : int.tryParse(row["discount"].toString()) ?? 0,
+        );
+      }).toList();
+    } else {
+      throw Exception("Failed to fetch products: ${response.statusCode}");
+    }
+  } catch (e) {
+    log("Error fetching products: $e");
+    throw Exception("Failed to fetch products: $e");
   }
 }
