@@ -1,0 +1,2 @@
+D:/Projects/University/lingerie_store_project/android/app/.cxx/Debug/6h3m6b6d/x86/CMakeFiles/edit_cache.dir
+D:/Projects/University/lingerie_store_project/android/app/.cxx/Debug/6h3m6b6d/x86/CMakeFiles/rebuild_cache.dir

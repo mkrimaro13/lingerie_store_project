@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:lingerie_store_project/utils/colors.dart';
 
 class CustomSideBar extends StatefulWidget {
   const CustomSideBar({super.key});
@@ -29,7 +28,7 @@ class _CustomSideBar extends State<CustomSideBar> {
         children: [
           DrawerHeader(
             decoration: BoxDecoration(
-              color: BrandColors.pastelPurple.value,
+              // color: BrandColors.pastelPurple.value,
               image: DecorationImage(
                 image: AssetImage('lib/images/logo.png'),
                 fit: BoxFit.cover,

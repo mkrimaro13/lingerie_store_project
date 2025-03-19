@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:lingerie_store_project/utils/colors.dart';
 
 class ExpandableFab extends StatefulWidget {
   final int selectedIndex;
@@ -30,11 +29,11 @@ class _ExpandableFabState extends State<ExpandableFab>
         width: _collapsedWidth,
         height: _expanded ? _expandedWidth : _collapsedWidth,
         decoration: BoxDecoration(
-          color: BrandColors.whitePurple.value,
+          // color: BrandColors.whitePurple.value,
           borderRadius: BorderRadius.circular(_collapsedWidth / 2),
           boxShadow: [
             BoxShadow(
-              color: BrandColors.pastelPurple.value,
+              // color: BrandColors.pastelPurple.value,
               blurRadius: 3,
             ),
           ],
@@ -54,7 +53,7 @@ class _ExpandableFabState extends State<ExpandableFab>
                       _buildIconButton(Icons.favorite_rounded, 'Favoritos', 2),
                       _buildIconButton(
                           Icons.shopping_bag_rounded, 'Productos', 1),
-                      _buildIconButton(Icons.home_rounded, 'Inicio', 1),
+                      _buildIconButton(Icons.home_rounded, 'Inicio', 0),
                     ],
                   ),
                 // Main icon always visible.

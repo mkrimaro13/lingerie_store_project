@@ -1,13 +1,11 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:lingerie_store_project/models/product_model.dart';
-import 'package:lingerie_store_project/utils/colors.dart';
+import 'package:lingerie_store_project/ui/widgets/cart_page/cart_provider.dart';
+import 'package:provider/provider.dart';
 
 class SimplifiedAddToCart extends StatefulWidget {
-  final VoidCallback? onPressed;
-  final ProductModel? product;
-  const SimplifiedAddToCart({super.key, this.onPressed, this.product});
+  final ProductModel product;
+  const SimplifiedAddToCart({super.key, required this.product});
 
   @override
   State<SimplifiedAddToCart> createState() => _CustomButtonAddToCart();
@@ -16,15 +14,15 @@ class SimplifiedAddToCart extends StatefulWidget {
 class _CustomButtonAddToCart extends State<SimplifiedAddToCart> {
   @override
   Widget build(BuildContext context) {
-    return Ink(
-      decoration: ShapeDecoration(
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(12))),
-          color: BrandColors.whitePurple.value),
-      child: IconButton(
-          onPressed: widget.onPressed ??
-              () => log('Button Simplified Add To cart pressed'),
-          icon: Icon(Icons.add_shopping_cart_rounded)),
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        minimumSize: Size(20, 40),
+      ),
+      onPressed: () {
+            final cart = Provider.of<CartProvider>(context, listen: false);
+            cart.addProduct(widget.product);
+          },
+      child: Icon(Icons.shopping_bag_rounded),
     );
   }
 }
