@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:lingerie_store_project/utils/colors.dart';
 import 'package:lingerie_store_project/utils/images/mediaquery_measures.dart';
 
 class ImageLoader extends StatelessWidget {
@@ -31,7 +30,7 @@ class ImageLoader extends StatelessWidget {
         placeholder: (context, url) => Transform.scale(
             scale: 0.4,
             child: CircularProgressIndicator(
-              color: BrandColors.pastelPurple.value,
+              color: Theme.of(context).primaryColor,
             )),
         errorWidget: (context, url, error) => Icon(Icons.error),
       ),
