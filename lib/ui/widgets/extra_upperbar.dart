@@ -15,7 +15,7 @@ class ExtraUpperbar extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: kMinInteractiveDimension,
-      width: MediaQuery.of(context).size.width - 10,
+      width: MediaQuery.of(context).size.width,
       child: DecoratedBox(
         decoration: BoxDecoration(
           color: Theme.of(context).scaffoldBackgroundColor,

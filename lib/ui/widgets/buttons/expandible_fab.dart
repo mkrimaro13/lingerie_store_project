@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 
 class ExpandableFab extends StatefulWidget {
   final int selectedIndex;
+  final IconData icon;
   final Function(int) onItemTapped;
   const ExpandableFab({
     super.key,
     required this.selectedIndex,
     required this.onItemTapped,
+    required this.icon
   });
 
   @override

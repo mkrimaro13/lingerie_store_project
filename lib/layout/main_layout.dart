@@ -39,7 +39,7 @@ class _MainScreenState extends State<HomeScreen> {
             ),
           ],
         ),
-        drawer: Drawer(
+        /*drawer: Drawer(
           width: 215,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.horizontal(
@@ -47,7 +47,7 @@ class _MainScreenState extends State<HomeScreen> {
             ),
           ),
           child: CustomSideBar(),
-        ),
+        ),*/
         body: PageView.builder(
           controller: _pageController,
           physics: NeverScrollableScrollPhysics(),

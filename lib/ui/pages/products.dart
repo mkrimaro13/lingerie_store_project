@@ -3,39 +3,74 @@ import 'package:lingerie_store_project/models/product_model.dart';
 import 'package:lingerie_store_project/ui/widgets/extra_upperbar.dart';
 import 'package:lingerie_store_project/ui/widgets/product_page/products_grid_view.dart';
 import 'package:lingerie_store_project/ui/widgets/product_page/products_list_view.dart';
+import 'package:get/get.dart';
 
-class ProductsPage extends StatefulWidget {
+/// Se cambia el método [setState(){}] para usar la librería [GetX]
+/// https://github.com/jonataslaw/getx/blob/master/documentation/en_US/state_management.md#state-management
+/// Principalmente para la gestión de estados de manera mas eficiente.
+/// [setState ]reconstruye todo el Widget, aunque solo cambie una cosa.
+/// [GetX] solo reconstruye lo que cambia.
+/// Adicionalmente, permite integrar programación reactiva ( que podrá servir
+/// para luego cuando se integre la api ) de manera mas simple.
+///
+/// Funcionamiento -> Se agrega un observable en la variable o en lo que
+/// se necesite observar, en este [Widget] se requiere observar el valor de
+/// [isGridView] por lo tanto se le agrega [.obs] al valor inicializado
+/// quedando
+/// ```dart
+/// final isGridView = true.obs;
+/// ```
+/// Y luego en los lugares donde el valor va a cambiar se envuelve en un método
+/// toda la función que cambia el valor de una variable
+///
+///```dart
+/// Obx(() => isGridView.value? const ProductsGridView(products: products): const ProductsListView(products: products))
+///```
+///Y así se tiene el Provider y el Notifier de manera mas simple para gestionar estados
+///Y mas eficiente que `setState`.
+
+class ProductsPage extends StatelessWidget {
   const ProductsPage({super.key});
 
-  @override
-  State<ProductsPage> createState() => _ProductsPageState();
-}
+//   @override
+//   State<ProductsPage> createState() => _ProductsPageState();
+// }
 
-class _ProductsPageState extends State<ProductsPage> {
-  bool _isGridView = true;
+// class _ProductsPageState extends State<ProductsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final isGridView = true.obs;
     const double appBarHeight = kMinInteractiveDimension;
-    return Stack(
+    return RepaintBoundary(
+        child: Stack(
       children: [
-        /// Se establece primero la vista principal de los productos, y
-        /// se le asigna un espacio en la parte superior para establecer
-        /// la barra superior.
+        /// Se asigna un espacio en la parte superior del elemento
+        /// Ya que [Stack] superpone todos los elementos, entonces,
+        /// es necesario tener este espacio para que el diseño
+        /// sea agradable a la vista.
         Positioned.fill(
             top: appBarHeight,
             child: ScrollConfiguration(
-              behavior: ScrollConfiguration.of(context).copyWith(
-                  scrollbars:
-                      false), // Desactiva que se muestre la barra de desplazamiento
-              child: _isGridView
-                  ? const ProductsGridView(
-                      products: products,
-                    )
-                  : const ProductsListView(
-                      products: products,
-                    ),
-            )),
+                behavior: ScrollConfiguration.of(context).copyWith(
+                    scrollbars:
+                        false), // Desactiva que se muestre la barra de desplazamiento
+                /// Se crea un observador para cuando el valor de la variable cambie.
+                /// Sin necesidad de un [Provider]
+                child: Obx(
+                  () => isGridView.value
+                      ? const ProductsGridView(
+                          products: products,
+                        )
+                      : const ProductsListView(
+                          products: products,
+                        ),
+                ))),
+
+        /// Este Widget debe estar en esta posición para que el efecto de la "sombra"
+
+        /// Se crea un Widget que "simula" ser una barra superior
+        /// para tener opciones necesarias en la vista de productos.
         ExtraUpperbar(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -60,22 +95,16 @@ class _ProductsPageState extends State<ProductsPage> {
                   },
                 ),
                 IconButton(
-                  tooltip: 'Cambiar la vista',
-                  icon: Icon(_isGridView
-                      ? Icons.view_list_rounded
-                      : Icons.grid_view_rounded),
-                  onPressed: () {
-                    setState(() {
-                      _isGridView = !_isGridView;
-                    });
-                  },
-                ),
+                    tooltip: 'Cambiar la vista',
+                    icon: Obx(() => isGridView.value
+                        ? Icon(Icons.view_list_rounded)
+                        : Icon(Icons.grid_view_rounded)),
+                    onPressed: () => isGridView.value = !isGridView.value),
               ],
             ),
           ],
         ),
-        // ),
       ],
-    );
+    ));
   }
 }
