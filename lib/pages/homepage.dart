@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-/// Página de inicio que solamente tiene el logo de la marca
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Material(

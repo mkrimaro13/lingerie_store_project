@@ -1,10 +1,10 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:lingerie_store_project/ui/widgets/buttons/peek_button.dart';
-import 'package:lingerie_store_project/ui/widgets/buttons/simplified_add_to_cart.dart';
 import 'package:lingerie_store_project/models/product_model.dart';
 import 'package:lingerie_store_project/utils/images/load_image.dart';
+import 'package:lingerie_store_project/widgets/buttons/peek.dart';
+import 'package:lingerie_store_project/widgets/buttons/simplified_add_to_cart.dart';
 
 /// Crea las [Card]s de cada producto.
 /// Las tarjetas en sí no cambian, su diseño es estático
@@ -18,7 +18,7 @@ class ProductCardGridView extends StatelessWidget {
     final imageWidget = ImageLoader(
       imagePath: product.productImagePath,
       height: 200,
-      width: 175,
+      width: 160,
     );
     return Card(
       child: Padding(
@@ -53,7 +53,7 @@ class ProductCardGridView extends StatelessWidget {
                 PeekButton(imageWidget: imageWidget),
                 SimplifiedAddToCart(product: product),
               ],
-            )
+            ),
           ],
         ),
       ),

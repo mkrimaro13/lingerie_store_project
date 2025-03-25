@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:lingerie_store_project/models/product_model.dart';
-import 'package:lingerie_store_project/ui/widgets/product_page/card/product_card_grid_view.dart';
+import 'package:lingerie_store_project/utils/mediaquery_measures.dart';
+import 'package:lingerie_store_project/views/products/cards/grid.dart';
 
 class ProductsGridView extends StatelessWidget {
   final List<ProductModel> products;
-  const ProductsGridView({
-    super.key,
-    required this.products,
-  });
+  const ProductsGridView({super.key, required this.products});
 
   @override
   Widget build(BuildContext context) {
@@ -18,29 +16,16 @@ class ProductsGridView extends StatelessWidget {
       padding: EdgeInsets.all(8.0),
       scrollDirection: Axis.vertical,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: _getCrossAxisCount(context), // Cantidad de columnas
+        crossAxisCount: getCrossAxisCount(context), // Cantidad de columnas
         crossAxisSpacing: 2, // Espacio entre columnas
         mainAxisSpacing: 2, // Espacio entre filas
         childAspectRatio: 0.57, // Ajusta la relación Alto-Ancho
       ),
       itemCount: products.length, // Cantidad de elementos a cargar.
       itemBuilder: (context, index) =>
+
           /// Llama al objeto que crea las tarjetas de cada producto.
           ProductCardGridView(product: products[index]),
     );
-  }
-}
-
-int _getCrossAxisCount(BuildContext context) {
-  //De acuerdo al tamaño de pantalla.
-  double screenWidth = MediaQuery.sizeOf(context).width;
-
-  switch (screenWidth) {
-    case < 600:
-      return 2;
-    case < 900:
-      return 3;
-    default:
-      return 4;
   }
 }

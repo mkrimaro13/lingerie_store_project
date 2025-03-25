@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:lingerie_store_project/models/product_model.dart';
-import 'package:lingerie_store_project/ui/widgets/product_page/card/product_card_list_view.dart';
+import 'package:lingerie_store_project/views/products/cards/list.dart';
 
 class ProductsListView extends StatelessWidget {
   final List<ProductModel> products;
-  const ProductsListView({
-    super.key,
-    required this.products,
-  });
+  const ProductsListView({super.key, required this.products});
 
   @override
   Widget build(BuildContext context) {

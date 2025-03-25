@@ -1,91 +1,40 @@
-import 'package:lingerie_store_project/ui/pages/cart.dart';
-import 'package:lingerie_store_project/ui/pages/profile.dart';
-import 'package:lingerie_store_project/utils/animations/fade_in.dart';
 import 'package:flutter/material.dart';
-import 'package:lingerie_store_project/ui/pages/home.dart';
-import 'package:lingerie_store_project/ui/pages/products.dart';
-import 'package:lingerie_store_project/ui/widgets/main_layout/bottom_navigation_bar.dart';
-import 'package:lingerie_store_project/ui/widgets/main_layout/sidebar.dart';
+import 'package:get/get.dart';
+import 'package:lingerie_store_project/animations/fade_in.dart';
+import 'package:lingerie_store_project/controllers/main_layout.dart';
+import 'package:lingerie_store_project/widgets/main_layout/bottom_navigation_bar.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
-
-  @override
-  State<HomeScreen> createState() => _MainScreenState();
-}
-
-class _MainScreenState extends State<HomeScreen> {
+class MainLayout extends StatelessWidget {
+  const MainLayout({super.key});
   @override
   Widget build(BuildContext context) {
+    final MainLayoutController controller = Get.put(MainLayoutController());
     return Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          leading: Builder(builder: (context) {
-            return IconButton(
-                tooltip: 'Menu',
-                onPressed: () {
-                  Scaffold.of(context).openDrawer();
-                },
-                icon: Icon(Icons.menu_rounded));
-          }),
-          centerTitle: true,
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.search_rounded),
-              tooltip: 'Buscar',
-              onPressed: () {
-                // Función de búsqueda.
-              },
-            ),
-          ],
+      appBar: AppBar(automaticallyImplyLeading: false, toolbarHeight: 1),
+      body: PageView.builder(
+        controller: controller.pageController,
+        physics: NeverScrollableScrollPhysics(),
+        itemCount: controller.pages.length,
+        itemBuilder: (context, index) {
+          return FadeInAnimation(
+            milliseconds: 500,
+            child: RepaintBoundary(child: controller.pages[index]),
+          );
+        },
+      ),
+
+      ///Para habilitar la actualización de la barra inferior
+      ///Se debe establecer el `observador` en todo el Widget, ya que el
+      ///widget depende tanto del valor de `selectIndex`, como de la
+      ///función `onItemTapped` que internamente actualiza `update()` su
+      ///valor.
+      ///`update()` envía la señal para repintar el Widget
+      bottomNavigationBar: Obx(
+        () => CustomBottomNavigationBar(
+          selectedIndex: controller.selectedIndex.value,
+          onItemTapped: controller.onItemTapped,
         ),
-        /*drawer: Drawer(
-          width: 215,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.horizontal(
-              right: Radius.circular(20),
-            ),
-          ),
-          child: CustomSideBar(),
-        ),*/
-        body: PageView.builder(
-          controller: _pageController,
-          physics: NeverScrollableScrollPhysics(),
-          itemCount: _pages.length,
-          itemBuilder: (context, index) {
-            return FadeInAnimation(child: _pages[index]);
-          },
-          onPageChanged: (index) => _onItemTapped(index),
-        ),
-        bottomNavigationBar: CustomBottomNavigationBar(
-          selectedIndex: selectedIndex,
-          onItemTapped: _onItemTapped,
-        ));
-  }
-
-  int selectedIndex = 0;
-
-  final PageController _pageController = PageController();
-
-  final List<Widget> _pages = [
-    HomePage(),
-    ProductsPage(),
-    ProductsCartPage(),
-    ProfilePage()
-  ];
-
-  _onItemTapped(int index) {
-    setState(() {
-      selectedIndex = index;
-    });
-    _pageController.jumpToPage(
-      index,
+      ),
     );
-  }
-
-  @override
-  void dispose() {
-    _pageController.dispose(); // Prevent memory leaks
-    super.dispose();
   }
 }

@@ -15,6 +15,7 @@ abstract class ThemeColors {
   final Color accent;
   final Color text;
   final Color border;
+  final Color transparent;
 
   const ThemeColors({
     required this.primary,
@@ -23,6 +24,7 @@ abstract class ThemeColors {
     required this.accent,
     required this.text,
     required this.border,
+    this.transparent = const Color.fromARGB(0, 255, 255, 255)
   });
 }
 
@@ -32,13 +34,13 @@ class LightThemeColors extends ThemeColors {
 
   const LightThemeColors._()
       : super(
-          primary: const Color(0xFFC5BAFF), // Morado pastel
-          secondary: const Color(0xFFC4D9FF), // Azul pastel
-          background: const Color(0xFFFBFBFB), // Blanco suave
-          accent: const Color(0xffF5EFFF), // Blanco con tono lila
-          text: const Color(0xFF17153B), // Azul oscuro para contraste
-          border: const Color(0xFFE0D9FF), // Lila pastel para bordes
-        );
+    primary: const Color(0xFFC5BAFF), // Morado pastel
+    secondary: const Color(0xFFC4D9FF), // Azul pastel
+    background: const Color(0xFFFBFBFB), // Blanco suave
+    accent: const Color(0xffF5EFFF), // Blanco con tono lila
+    text: const Color(0xFF17153B), // Azul oscuro para contraste
+    border: const Color(0xFFE0D9FF), // Lila pastel para bordes
+  );
 }
 
 /// Paleta de colores para el tema oscuro.
@@ -47,11 +49,11 @@ class DarkThemeColors extends ThemeColors {
 
   const DarkThemeColors._()
       : super(
-          background: const Color(0xFF17153B), // Azul oscuro intenso
-          primary: const Color(0xFF8A7ACC), // Morado pastel más oscuro
-          secondary: const Color(0xFF718EC6), // Azul pastel más profundo
-          accent: const Color(0xFF5D5475), // Lila grisáceo para contraste
-          text: const Color(0xFFF5EFFF), // Blanco lila para textos
-          border: const Color(0xFF4A3D6A), // Morado grisáceo para bordes
-        );
+    background: const Color(0xFF17153B), // Azul oscuro intenso
+    primary: const Color(0xFF8A7ACC), // Morado pastel más oscuro
+    secondary: const Color(0xFF718EC6), // Azul pastel más profundo
+    accent: const Color(0xFF5D5475), // Lila grisáceo para contraste
+    text: const Color(0xFFF5EFFF), // Blanco lila para textos
+    border: const Color(0xFF4A3D6A), // Morado grisáceo para bordes
+  );
 }

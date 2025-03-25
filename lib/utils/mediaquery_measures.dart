@@ -1,11 +1,5 @@
 import 'package:flutter/material.dart';
 
-// class MediaqueryMeasures {
-//   BuildContext context;
-//     double screenWidth = MediaQuery.of(context).size.width;
-
-// }
-
 double getPadding(BuildContext context) {
   double screenWidth = MediaQuery.of(context).size.width;
 
@@ -54,5 +48,19 @@ double getSpacing(BuildContext context) {
       return 0;
     default:
       return 8;
+  }
+}
+
+int getCrossAxisCount(BuildContext context) {
+  //De acuerdo al tamaño de pantalla.
+  double screenWidth = MediaQuery.sizeOf(context).width;
+
+  switch (screenWidth) {
+    case < 600:
+      return 2;
+    case < 900:
+      return 3;
+    default:
+      return 4;
   }
 }

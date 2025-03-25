@@ -39,6 +39,7 @@ dependencies:
   provider: ^6.1.2
   webp: ^1.0.0
   get:
+  keyboard_avoider: ^0.2.0
 
 dev_dependencies:
   flutter_test:
@@ -75,6 +76,8 @@ flutter:
     - "lib/images/emptybag.png"
     - "lib/images/icons/header_icon_heart.png"
     - "lib/images/icons/icon_erotic_woman.png"
+    - "lib/images/icons/icon-female-user-dark.webp"
+    - "lib/images/icons/icon-female-user-light.webp"
 
   # To add assets to your application, add an assets section, like this:
   # assets:

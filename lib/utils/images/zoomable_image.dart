@@ -9,7 +9,7 @@ void showZoomableImage(BuildContext context, Widget image) {
       child: SizedBox(
         width: MediaQuery.of(context).size.width * 0.9,
         height:
-            MediaQuery.of(context).size.height * 0.7, // 80% of screen height
+            MediaQuery.of(context).size.height * 0.5, // 80% of screen height
         child: ZoomableImage(image: image),
       ),
     ),
@@ -38,7 +38,7 @@ class ZoomableImageState extends State<ZoomableImage>
       vsync: this,
       duration: Duration(milliseconds: 300),
     );
-    _animation = Tween<double>(begin: 0.1, end: 1.0).animate(
+    _animation = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(parent: _controller, curve: Curves.easeOut),
     );
 

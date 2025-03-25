@@ -1,24 +1,28 @@
 import 'dart:developer';
+
 import 'package:flutter/material.dart';
-import 'package:lingerie_store_project/ui/widgets/buttons/peek_button.dart';
-import 'package:lingerie_store_project/ui/widgets/buttons/simplified_add_to_cart.dart';
 import 'package:lingerie_store_project/models/product_model.dart';
 import 'package:lingerie_store_project/utils/images/load_image.dart';
 import 'package:lingerie_store_project/utils/images/zoomable_image.dart';
+import 'package:lingerie_store_project/widgets/buttons/extended.dart';
 
-/// Crea las [Card]s de cada producto.
-/// Las tarjetas en sí no cambian, su diseño es estático
-class ProductCardListView extends StatelessWidget {
+class CartCard extends StatelessWidget {
   final ProductModel product;
-
-  const ProductCardListView({super.key, required this.product});
+  final VoidCallback onPressed;
+  final String buttonLabel;
+  const CartCard(
+      {super.key,
+      required this.product,
+      required this.onPressed,
+      required this.buttonLabel});
 
   @override
   Widget build(BuildContext context) {
-    ImageLoader imageWidget = ImageLoader(
+    ImageLoader imageLoaded = ImageLoader(
       imagePath: product.productImagePath,
+      height: 150,
+      width: 150,
     );
-
     return Card(
       shape: BeveledRectangleBorder(
         borderRadius: BorderRadius.circular(8.0), // Less rounded, more angled
@@ -26,9 +30,9 @@ class ProductCardListView extends StatelessWidget {
       elevation: 1,
       borderOnForeground: false,
       child: Padding(
-          padding: EdgeInsets.all(10.0),
+          padding: EdgeInsets.all(8.0),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               // Para darle acciones al tocar la foto, un toque, o pulsación larga.
@@ -36,15 +40,12 @@ class ProductCardListView extends StatelessWidget {
                   onTap: () => log('Clicked ${product.productName}'),
                   onLongPress: () {
                     log('Long Pressed ${product.productName}');
-                    showZoomableImage(context, imageWidget);
+                    showZoomableImage(context, imageLoaded);
                   },
-                  child: imageWidget),
-
-              /// Para la [ListView] No se debe usar Expanded, en su lugar se coloca una [Column]
-              /// Y se agregan los elementos necesarios.
+                  child: imageLoaded),
               Column(
-                spacing: 15,
-                mainAxisAlignment: MainAxisAlignment.center,
+                spacing: 8,
+                mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
@@ -63,13 +64,10 @@ class ProductCardListView extends StatelessWidget {
                     overflow: TextOverflow.visible,
                     softWrap: true,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      PeekButton(imageWidget: imageWidget),
-                      SimplifiedAddToCart(product: product),
-                    ],
-                  )
+                  ExtendedButton(
+                    buttonLabel: buttonLabel,
+                    onPressed: onPressed,
+                  ),
                 ],
               )
             ],
