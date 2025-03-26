@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lingerie_store_project/animations/fade_in.dart';
 import 'package:lingerie_store_project/controllers/main_layout.dart';
+import 'package:lingerie_store_project/layout/background.dart';
 import 'package:lingerie_store_project/widgets/main_layout/bottom_navigation_bar.dart';
 
 class MainLayout extends StatelessWidget {
@@ -18,7 +19,8 @@ class MainLayout extends StatelessWidget {
         itemBuilder: (context, index) {
           return FadeInAnimation(
             milliseconds: 500,
-            child: RepaintBoundary(child: controller.pages[index]),
+            child: RepaintBoundary(
+                child: SpecialBackground(child: controller.pages[index])),
           );
         },
       ),

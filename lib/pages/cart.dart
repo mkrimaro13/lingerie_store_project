@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lingerie_store_project/controllers/cart.dart';
-import 'package:lingerie_store_project/layout/background.dart';
 import 'package:lingerie_store_project/views/cart/card.dart';
 import 'package:lingerie_store_project/widgets/buttons/extended.dart';
 import 'package:lingerie_store_project/widgets/main_layout/extra_upperbar.dart';
@@ -21,8 +20,7 @@ class ProductsCartPage extends StatelessWidget {
     /// elimina y se libera ese espacio de la memoria.
     /// Pero si tiene información (ya que es un método estático) almacena
     /// se vuelve persistente, mientras tenga información almacenada.
-    return SpecialBackground(
-      child: GetBuilder<CartController>(
+    return GetBuilder<CartController>(
         init: CartController(),
         builder: (controller) => controller.products.isEmpty
             ? Column(
@@ -99,7 +97,6 @@ class ProductsCartPage extends StatelessWidget {
                   ),
                 ],
               ),
-      ),
-    );
+          );
   }
 }

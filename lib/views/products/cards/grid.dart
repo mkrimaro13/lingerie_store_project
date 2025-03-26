@@ -17,12 +17,12 @@ class ProductCardGridView extends StatelessWidget {
   Widget build(BuildContext context) {
     final imageWidget = ImageLoader(
       imagePath: product.productImagePath,
-      height: 200,
+      height: 190,
       width: 160,
     );
     return Card(
       child: Padding(
-        padding: EdgeInsets.all(4.0),
+        padding: EdgeInsets.all(12.0),
         child: Column(
           spacing: 2,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

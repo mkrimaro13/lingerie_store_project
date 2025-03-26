@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lingerie_store_project/layout/background.dart';
 import 'package:lingerie_store_project/models/product_model.dart';
 import 'package:lingerie_store_project/views/products/grid.dart';
 import 'package:lingerie_store_project/views/products/list.dart';
@@ -37,8 +36,7 @@ class ProductsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final isGridView = true.obs;
     const double appBarHeight = kMinInteractiveDimension;
-    return SpecialBackground(
-      child: Stack(
+    return Stack(
         children: [
           /// Se asigna un espacio en la parte superior del elemento
           /// Ya que [Stack] superpone todos los elementos, entonces,
@@ -101,7 +99,6 @@ class ProductsPage extends StatelessWidget {
             ],
           ),
         ],
-      ),
     );
   }
 }

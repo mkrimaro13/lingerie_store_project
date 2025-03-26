@@ -22,13 +22,8 @@ class ProductCardListView extends StatelessWidget {
     );
 
     return Card(
-      shape: BeveledRectangleBorder(
-        borderRadius: BorderRadius.circular(8.0), // Less rounded, more angled
-      ),
-      elevation: 1,
-      borderOnForeground: false,
       child: Padding(
-        padding: EdgeInsets.all(10.0),
+        padding: EdgeInsets.all(12),
         child: Row(
           spacing: 40,
           mainAxisAlignment: MainAxisAlignment.start,

@@ -21,7 +21,7 @@ class ExtendedButton extends StatelessWidget {
       child: Text(
         buttonLabel,
         textAlign: TextAlign.center,
-        style: Theme.of(context).textTheme.labelSmall,
+        style: Theme.of(context).textTheme.labelMedium,
       ),
     );
   }
