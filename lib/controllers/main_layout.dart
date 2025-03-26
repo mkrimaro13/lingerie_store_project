@@ -8,6 +8,7 @@ import 'package:lingerie_store_project/pages/profile.dart';
 class MainLayoutController extends GetxController {
   var selectedIndex = 0.obs;
   final PageController pageController = PageController();
+  static MainLayoutController get to => Get.find();
 
   final List<Widget> pages = [
     // HomePage(),

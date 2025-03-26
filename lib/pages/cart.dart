@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:lingerie_store_project/controllers/cart.dart';
 import 'package:lingerie_store_project/views/cart/card.dart';
 import 'package:lingerie_store_project/widgets/buttons/extended.dart';
-import 'package:lingerie_store_project/widgets/main_layout/extra_upperbar.dart';
+import 'package:lingerie_store_project/widgets/main_layout/upper_bar.dart';
 
 // class ProductsCartPage extends StatefulWidget {
 class ProductsCartPage extends StatelessWidget {

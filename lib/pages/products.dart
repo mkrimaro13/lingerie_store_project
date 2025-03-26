@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:lingerie_store_project/models/product_model.dart';
 import 'package:lingerie_store_project/views/products/grid.dart';
 import 'package:lingerie_store_project/views/products/list.dart';
-import 'package:lingerie_store_project/widgets/main_layout/extra_upperbar.dart';
+import 'package:lingerie_store_project/widgets/main_layout/upper_bar.dart';
 
 /// Se cambia el método [setState(){}] para usar la librería [GetX]
 /// https://github.com/jonataslaw/getx/blob/master/documentation/en_US/state_management.md#state-management

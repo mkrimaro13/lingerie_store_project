@@ -3,13 +3,13 @@ import 'package:get/get.dart';
 import 'package:lingerie_store_project/animations/fade_in.dart';
 import 'package:lingerie_store_project/controllers/main_layout.dart';
 import 'package:lingerie_store_project/layout/background.dart';
-import 'package:lingerie_store_project/widgets/main_layout/bottom_navigation_bar.dart';
+import 'package:lingerie_store_project/widgets/main_layout/navigation_bar.dart';
 
 class MainLayout extends StatelessWidget {
-  const MainLayout({super.key});
+  final MainLayoutController controller = MainLayoutController.to;
+  MainLayout({super.key});
   @override
   Widget build(BuildContext context) {
-    final MainLayoutController controller = Get.put(MainLayoutController());
     return Scaffold(
       appBar: AppBar(automaticallyImplyLeading: false, toolbarHeight: 1),
       body: PageView.builder(

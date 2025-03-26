@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lingerie_store_project/views/signup/welcome.dart';
+import 'package:lingerie_store_project/pages/signup.dart';
 import 'package:lingerie_store_project/widgets/buttons/extended.dart';
 
 class ProfilePage extends StatelessWidget {
