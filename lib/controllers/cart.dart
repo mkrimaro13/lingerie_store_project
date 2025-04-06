@@ -17,14 +17,17 @@ class CartController extends GetxController {
 
   void addProduct(ProductModel product) {
     products.add(product);
+    update();
   }
 
   void removeProduct(ProductModel product) {
     products.remove(product);
+    update();
   }
 
   void clearCart() {
     products.clear();
+    update();
   }
 
   int get totalPrice =>

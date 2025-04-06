@@ -11,8 +11,6 @@ class ProductsCartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = CartController.to;
-
     /// Se usa un [Builder] del controlador.
     /// Se envuelve todo el control de los [Widget]s dentro del [Builder].
     /// En el `init` se inicializa el [CartController] al ingresar a la
@@ -20,14 +18,11 @@ class ProductsCartPage extends StatelessWidget {
     /// elimina y se libera ese espacio de la memoria.
     /// Pero si tiene información (ya que es un método estático) almacena
     /// se vuelve persistente, mientras tenga información almacenada.
-    return controller.products.isEmpty
-        ? noProductsWidget(context)
-        : productsWidget(context, controller);
-    // return GetBuilder<CartController>(
-    //     init: CartController(),
-    //     builder: (controller) => controller.products.isEmpty
-    //         ? noProductsWidget(context)
-    //         : productsWidget(context, controller));
+    return GetBuilder<CartController>(
+        init: CartController(),
+        builder: (controller) => controller.products.isEmpty
+            ? noProductsWidget(context)
+            : productsWidget(context, controller));
   }
 }
 

@@ -50,16 +50,16 @@ class CartCard extends StatelessWidget {
                 children: [
                   Text(
                     textAlign: TextAlign.center,
-                    product.productName,
-                    style: Theme.of(context).textTheme.labelMedium,
+                    '\$${product.price.toString()}',
+                    style: Theme.of(context).textTheme.labelLarge,
                     maxLines: 2,
                     overflow: TextOverflow.visible,
                     softWrap: true,
                   ),
                   Text(
                     textAlign: TextAlign.center,
-                    '\$${product.price.toString()}',
-                    style: Theme.of(context).textTheme.labelLarge,
+                    product.productName,
+                    style: Theme.of(context).textTheme.labelMedium,
                     maxLines: 2,
                     overflow: TextOverflow.visible,
                     softWrap: true,

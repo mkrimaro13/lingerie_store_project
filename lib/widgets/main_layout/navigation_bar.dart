@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lingerie_store_project/widgets/signup/bottom_bar.dart';
 
 /// La barra inferior es dinámica.
 /// Primero debe ser persistente, aunque suene contradictorio, en toda la aplicación.
@@ -23,8 +24,12 @@ class CustomBottomNavigationBar extends StatelessWidget {
   // class _CustomBottomNavigationBar extends State<CustomBottomNavigationBar> {
   @override
   Widget build(BuildContext context) {
-    return NavigationBar(
-      
+    return Container(
+        alignment: Alignment.center,
+        width: double.infinity,
+        height: 72,
+        decoration: decoration(context),
+        child:NavigationBar(
       selectedIndex: selectedIndex,
       onDestinationSelected: onItemTapped,
       destinations: [

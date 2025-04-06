@@ -65,17 +65,18 @@ class BottomBar extends StatelessWidget {
         ));
   }
 
-  BoxDecoration decoration(BuildContext context){
-    return BoxDecoration(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-          gradient: LinearGradient(
-            colors: [
-              Theme.of(context).colorScheme.primary,
-              Theme.of(context).colorScheme.secondary,
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-        );
-  }
+
+}
+BoxDecoration decoration(BuildContext context) {
+  return BoxDecoration(
+    borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+    gradient: LinearGradient(
+      colors: [
+        Theme.of(context).colorScheme.primary,
+        Theme.of(context).colorScheme.secondary,
+      ],
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+    ),
+  );
 }
