@@ -73,6 +73,7 @@ flutter:
     - "lib/images/logo2.png"
     - "lib/images/logo2-white.png"
     - "lib/images/logo3.png"
+    - "lib/images/backgrounds/signup-background.webp"
     - "lib/images/emptybag.png"
     - "lib/images/icons/header_icon_heart.png"
     - "lib/images/icons/icon_erotic_woman.png"

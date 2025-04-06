@@ -8,7 +8,7 @@ import 'package:lingerie_store_project/pages/profile.dart';
 class MainLayoutController extends GetxController {
   var selectedIndex = 0.obs;
   final PageController pageController = PageController();
-  static MainLayoutController get to => Get.find();
+  static MainLayoutController get init => Get.put(MainLayoutController());
 
   final List<Widget> pages = [
     // HomePage(),
@@ -20,7 +20,7 @@ class MainLayoutController extends GetxController {
   void onItemTapped(int index) {
     selectedIndex.value = index;
     pageController.jumpToPage(index);
-    update();
+    // update();
   }
 
   @override

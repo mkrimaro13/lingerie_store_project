@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:lingerie_store_project/pages/signup.dart';
 import 'package:lingerie_store_project/widgets/buttons/extended.dart';
 
@@ -39,10 +40,7 @@ class ProfilePage extends StatelessWidget {
             text: "Crear Cuenta",
             color: Colors.blueAccent[100]!,
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => SignupPage()),
-              );
+              Get.to(() => SignupPage());
             },
           ),
         ],

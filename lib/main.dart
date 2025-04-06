@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:lingerie_store_project/controllers/main_layout.dart';
 import 'package:lingerie_store_project/layout/themecolors.dart';
 import 'package:lingerie_store_project/layout/themes.dart';
 import 'package:lingerie_store_project/pages/loading.dart';
 
 void main() {
-  Get.put(MainLayoutController());
-  // debugPrintRebuildDirtyWidgets = true;
-
   /// Se asegura que la aplicación halla iniciado
   WidgetsFlutterBinding.ensureInitialized();
 

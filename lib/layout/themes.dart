@@ -18,7 +18,7 @@ ThemeData appTheme(Brightness brightness, ThemeColors colors) {
     scaffoldBackgroundColor: colors.background,
     appBarTheme: AppBarTheme(
       toolbarHeight: 50,
-      elevation: 4,
+      elevation: 5,
       backgroundColor: colors.background,
       foregroundColor: colors.text,
       shadowColor: colors.border,

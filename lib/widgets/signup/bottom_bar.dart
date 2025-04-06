@@ -17,9 +17,7 @@ class BottomBar extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.vertical(top: Radius.circular(8)),
           gradient: LinearGradient(
-            colors:
-                //  [Colors.blue[100]!, Colors.pink[100]!],
-                [
+            colors: [
               Theme.of(context).colorScheme.primary,
               Theme.of(context).colorScheme.secondary,
             ],

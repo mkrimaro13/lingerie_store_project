@@ -14,13 +14,14 @@ class LoadingPageState extends State<LoadingPage> {
   @override
   void initState() {
     super.initState();
-    if (mounted) {
-      Future.delayed(Duration(seconds: 3), () {
-        /// `Get.off()` permite ir a una página siguiente, sin posibilidad de
-        /// volver hacía atrás
-        Get.off(() => RepaintBoundary(child: MainLayout()));
-      });
-    }
+    Future.delayed(Duration(seconds: 1), () {
+      /// `Get.off()` permite ir a una página siguiente, sin posibilidad de
+      /// volver hacía atrás
+      if (mounted) {
+        Get.off(() => RepaintBoundary(child:const MainLayout()));
+      }
+      // Get.off(() => RepaintBoundary(child: const MainLayout()));
+    });
   }
 
   @override
@@ -35,15 +36,14 @@ class LoadingPageState extends State<LoadingPage> {
         backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
         body: Center(
           child: Column(
+            spacing: 16,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset('lib/images/icons/icon_erotic_woman.png'),
-              SizedBox(height: 16),
               Text(
                 'Cargando...',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 16),
               CircularProgressIndicator(
                 color: Theme.of(context)
                     .appBarTheme

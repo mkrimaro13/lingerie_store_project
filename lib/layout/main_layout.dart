@@ -6,12 +6,14 @@ import 'package:lingerie_store_project/layout/background.dart';
 import 'package:lingerie_store_project/widgets/main_layout/navigation_bar.dart';
 
 class MainLayout extends StatelessWidget {
-  final MainLayoutController controller = MainLayoutController.to;
-  MainLayout({super.key});
+  const MainLayout({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(automaticallyImplyLeading: false, toolbarHeight: 1),
+    // Recupera la instancia existente
+    final controller = Get.put(MainLayoutController());
+    return 
+    Scaffold(
       body: PageView.builder(
         controller: controller.pageController,
         physics: NeverScrollableScrollPhysics(),
@@ -20,7 +22,8 @@ class MainLayout extends StatelessWidget {
           return FadeInAnimation(
             milliseconds: 500,
             child: RepaintBoundary(
-                child: SpecialBackground(child: controller.pages[index])),
+              child: SpecialBackground(child: controller.pages[index]),
+            ),
           );
         },
       ),
