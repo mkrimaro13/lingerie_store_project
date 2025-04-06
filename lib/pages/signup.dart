@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lingerie_store_project/animations/fade_in.dart';
@@ -48,7 +50,7 @@ class SignupPage extends StatelessWidget {
                       },
                     ),
                   ),
-                  BottomBar(controller: controller),
+                  BottomBar(controller: controller)
                 ],
               ),
             ),

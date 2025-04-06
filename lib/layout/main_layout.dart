@@ -12,11 +12,10 @@ class MainLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     // Recupera la instancia existente
     final controller = Get.put(MainLayoutController());
-    return 
-    Scaffold(
+    return Scaffold(
       body: PageView.builder(
         controller: controller.pageController,
-        physics: NeverScrollableScrollPhysics(),
+        physics: BouncingScrollPhysics(),
         itemCount: controller.pages.length,
         itemBuilder: (context, index) {
           return FadeInAnimation(
@@ -32,8 +31,7 @@ class MainLayout extends StatelessWidget {
       ///Se debe establecer el `observador` en todo el Widget, ya que el
       ///widget depende tanto del valor de `selectIndex`, como de la
       ///función `onItemTapped` que internamente actualiza `update()` su
-      ///valor.
-      ///`update()` envía la señal para repintar el Widget
+
       bottomNavigationBar: Obx(
         () => CustomBottomNavigationBar(
           selectedIndex: controller.selectedIndex.value,

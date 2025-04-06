@@ -24,6 +24,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return NavigationBar(
+      
       selectedIndex: selectedIndex,
       onDestinationSelected: onItemTapped,
       destinations: [

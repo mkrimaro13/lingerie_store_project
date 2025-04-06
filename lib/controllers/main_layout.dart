@@ -24,6 +24,21 @@ class MainLayoutController extends GetxController {
   }
 
   @override
+  void onInit() {
+    super.onInit();
+
+    // Escuchar el cambio de página
+    pageController.addListener(() {
+      final currentPage = pageController.page?.round() ?? 0;
+
+      // Solo actualiza si el índice cambia
+      if (selectedIndex.value != currentPage) {
+        selectedIndex.value = currentPage;
+      }
+    });
+  }
+
+  @override
   void onClose() {
     pageController.dispose(); // Evita fugas de memoria
     super.onClose();

@@ -37,6 +37,11 @@ ThemeData appTheme(Brightness brightness, ThemeColors colors) {
         borderRadius: BorderRadius.circular(8.0),
       ),
     ),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: Colors.transparent,
+      elevation: 8,
+      enableFeedback: true,
+    ),
     navigationBarTheme: NavigationBarThemeData(
       backgroundColor: colors.background,
       shadowColor: colors.border,
