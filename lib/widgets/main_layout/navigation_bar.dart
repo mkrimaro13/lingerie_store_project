@@ -29,28 +29,28 @@ class CustomBottomNavigationBar extends StatelessWidget {
         width: double.infinity,
         height: 72,
         decoration: decoration(context),
-        child:NavigationBar(
-      selectedIndex: selectedIndex,
-      onDestinationSelected: onItemTapped,
-      destinations: [
-        // _buildNavItem(Icons.home_rounded, Icons.home_outlined, 'Inicio'),
-        _buildNavItem(
-          Icons.shopping_bag_rounded,
-          Icons.shopping_bag_outlined,
-          'Productos',
-        ),
-        _buildNavItem(
-          Icons.shopping_cart_rounded,
-          Icons.shopping_cart_outlined,
-          'Carrito',
-        ),
-        _buildNavItem(
-          Icons.person_2_rounded,
-          Icons.person_2_outlined,
-          'Perfil',
-        ),
-      ],
-    );
+        child: NavigationBar(
+          selectedIndex: selectedIndex,
+          onDestinationSelected: onItemTapped,
+          destinations: [
+            // _buildNavItem(Icons.home_rounded, Icons.home_outlined, 'Inicio'),
+            _buildNavItem(
+              Icons.shopping_bag_rounded,
+              Icons.shopping_bag_outlined,
+              'Productos',
+            ),
+            _buildNavItem(
+              Icons.shopping_cart_rounded,
+              Icons.shopping_cart_outlined,
+              'Carrito',
+            ),
+            _buildNavItem(
+              Icons.person_2_rounded,
+              Icons.person_2_outlined,
+              'Perfil',
+            ),
+          ],
+        ));
   }
 
   NavigationDestination _buildNavItem(

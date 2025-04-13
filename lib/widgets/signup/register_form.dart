@@ -8,14 +8,38 @@ import 'package:lingerie_store_project/controllers/signup.dart';
 import 'package:lingerie_store_project/widgets/buttons/extended.dart';
 import 'package:lingerie_store_project/widgets/signup/form_text_field.dart';
 
-class PersonalDataForm extends StatelessWidget {
+class PersonalDataForm extends StatefulWidget {
   const PersonalDataForm({super.key});
+
+  @override
+  State<PersonalDataForm> createState() => _PersonalDataFormState();
+}
+
+class _PersonalDataFormState extends State<PersonalDataForm> {
+  /// Esta parte tiene como finalidad obtener el ancho del botón de texto
+  /// para usar el mismo ancho en el menu desplegable y que sea estético.
+  /// Ya que asignándole un ancho "infinito" al menú desplegable lo rompía,
+  /// Y encapsulado en un [Container] o una [SizedBox] lo hacía mas pequeño.
+  final GlobalKey textFieldKey = GlobalKey();
+  double? textFieldWidth;
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final RenderBox box =
+          textFieldKey.currentContext!.findRenderObject() as RenderBox;
+      setState(() {
+        textFieldWidth = box.size.width;
+        // print("Ancho del CustomTextField: $textFieldWidth");
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
-    final PersonalDataFormController controller =
-        Get.put(PersonalDataFormController());
+    final controller = Get.put(PersonalDataFormController());
+
     return Form(
       key: formKey,
       child: KeyboardAvoider(
@@ -25,25 +49,34 @@ class PersonalDataForm extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             CustomTextField(
+              key: textFieldKey,
               controller: controller.nameController,
-              validator: (value) => value.isEmpty ? "Campo obligatorio" : null,
+              validator: controller
+                  .validateName, // Llamamos al controlador para la validación
               labelText: "Nombres",
               hintText: "Ingresa tu nombre",
+              icon: controller.nameIcon, // Pasamos el ícono dinámico
+              errorMessage:
+                  controller.validateName(controller.nameController.text),
             ),
             CustomTextField(
               controller: controller.lastNameController,
-              validator: (value) => value.isEmpty ? "Campo obligatorio" : null,
+              validator: controller
+                  .validateName, // Llamamos al controlador para la validación
               labelText: "Apellidos",
               hintText: "Apellidos",
+              icon: controller.lastNameIcon, // Pasamos el ícono dinámico
+              errorMessage:
+                  controller.validateName(controller.lastNameController.text),
             ),
             CustomTextField(
-              prefixIcon: Icon(Icons.calendar_month_rounded),
               controller: controller.birthdateController,
+              validator: controller
+                  .validateBirthdate, // Llamamos al controlador para la validación
               labelText: "Cumpleaños (Opcional)",
               hintText: "Cumpleaños",
               readOnly: true,
               onTap: () async {
-                /// https://api.flutter.dev/flutter/material/showDatePicker.html
                 DateTime? pickedDate = await showDatePicker(
                   context: context,
                   initialDate: DateTime.now(),
@@ -53,82 +86,44 @@ class PersonalDataForm extends StatelessWidget {
                 controller.birthdateController.text = pickedDate != null
                     ? "${pickedDate.day}/${pickedDate.month}/${pickedDate.year}"
                     : "No haz seleccionado ninguna fecha";
-                log(controller.birthdateController.text.toString());
               },
+              icon: controller.birthdateIcon, // Pasamos el ícono dinámico
+              errorMessage: controller
+                  .validateBirthdate(controller.birthdateController.text),
             ),
-            DropdownMenu<Gender>(
-              width: MediaQuery.of(context).size.width,
-              inputDecorationTheme: InputDecorationTheme(
-                labelStyle: const TextStyle(fontSize: 18), // Estilo del texto
-                filled: true, // Activa el fondo de color
-                fillColor: Theme.of(context)
-                    .appBarTheme
-                    .backgroundColor, // Color de fondo
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide:
-                      BorderSide(color: AppBarTheme.of(context).shadowColor!),
+            // Mostramos el Dropdown solo si el ancho ya fue calculado
+            if (textFieldWidth != null)
+              DropdownMenu<Gender>(
+                width: textFieldWidth!,
+                inputDecorationTheme: InputDecorationTheme(
+                  labelStyle: const TextStyle(fontSize: 18),
+                  filled: true,
+                  fillColor: Theme.of(context).appBarTheme.backgroundColor,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(
+                      color: AppBarTheme.of(context).shadowColor ?? Colors.grey,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide:
+                        const BorderSide(color: Colors.deepPurple, width: 2),
+                  ),
                 ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide:
-                      const BorderSide(color: Colors.deepPurple, width: 2),
-                ),
+                initialSelection: Gender.female,
+                controller: controller.genderController,
+                requestFocusOnTap: true,
+                label: const Text('Género'),
+                onSelected: (Gender? gender) {
+                  if (gender == null) {
+                    controller.gender.value = Gender.female.toString();
+                  } else {
+                    controller.gender.value = gender.gender;
+                  }
+                },
+                dropdownMenuEntries: Gender.entries,
               ),
-              initialSelection: Gender.female,
-              controller: controller.genderController,
-              requestFocusOnTap: true,
-              label: const Text('Genero'),
-              onSelected: (Gender? gender) {
-                if (gender != null) {
-                  controller.gender.value = gender.gender;
-                }
-              },
-              dropdownMenuEntries: Gender.entries,
-            ),
-            // DropdownButtonFormField<String>(
-            //   value: controller.gender.value.isEmpty
-            //       ? null
-            //       : controller.gender.value,
-            //   decoration: InputDecoration(
-            //     labelText: "Género (Opcional)",
-            //     border: OutlineInputBorder(
-            //       // Bordes personalizados
-            //       borderRadius: BorderRadius.circular(12),
-            //       borderSide:
-            //           BorderSide(color: AppBarTheme.of(context).shadowColor!),
-            //     ),
-            //     focusedBorder: OutlineInputBorder(
-            //       // Borde cuando el campo está enfocado
-            //       borderRadius: BorderRadius.circular(12),
-            //       borderSide: BorderSide(color: Colors.deepPurple, width: 2),
-            //     ),
-            //     filled: true, // Activa el fondo de color
-            //     fillColor: Theme.of(context)
-            //         .appBarTheme
-            //         .backgroundColor, // Color de fondo
-            //   ),
-            //   dropdownColor: Theme.of(context).appBarTheme.backgroundColor,
-            //   style: TextStyle(
-            //       fontSize: 18,
-            //       color: Theme.of(context)
-            //           .appBarTheme
-            //           .foregroundColor), // Estilo del texto),
-            //   items: ["Masculino", "Femenino"].map((String value) {
-            //     return DropdownMenuItem<String>(
-            //       value: value,
-            //       child: Text(
-            //         value,
-            //         style: TextStyle(
-            //             fontSize: 16,
-            //             color: Theme.of(context).appBarTheme.foregroundColor),
-            //       ),
-            //     );
-            //   }).toList(),
-            //   onChanged: (value) {
-            //     controller.gender.value = value ?? "";
-            //   },
-            // ),
             Row(
               spacing: 20,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -138,25 +133,26 @@ class PersonalDataForm extends StatelessWidget {
                   onPressed: () {
                     Get.until(
                         (route) => Get.currentRoute == "/RepaintBoundary");
-                    // Get.off(() => RepaintBoundary(
-                    //       child: const MainLayout(),
-                    //     ));
                     Get.delete();
-
-                    /// -> Elimina el controlador al salir de la la vista.
                   },
                 ),
                 ExtendedButton(
                   buttonLabel: "Continuar",
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
+                      final user = controller.getUserData();
+                      log("Nombre: ${user.name}");
+                      log("Apellido: ${user.lastName}");
+                      log("Nacimiento: ${user.birthDay}");
+                      log("Género: ${user.genre}");
+
                       Get.snackbar(
                           "Registro Exitoso", "Datos guardados correctamente");
                     }
                   },
-                )
+                ),
               ],
-            )
+            ),
           ],
         ),
       ),

@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lingerie_store_project/animations/fade_in.dart';
@@ -18,7 +16,7 @@ class SignupPage extends StatelessWidget {
       init: ProgressController(),
       builder: (controller) => Scaffold(
         key: scaffoldKey,
-        resizeToAvoidBottomInset: true,
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           toolbarHeight: 1,
         ),
@@ -35,7 +33,7 @@ class SignupPage extends StatelessWidget {
                 children: [
                   ProgressBar(controller: controller),
                   Expanded(
-                    // 🔹 Se agrega Expanded para restringir el tamaño
+                    // Se agrega Expanded para restringir el tamaño
                     child: PageView.builder(
                       physics: NeverScrollableScrollPhysics(),
                       controller: controller.pageController,
@@ -44,7 +42,11 @@ class SignupPage extends StatelessWidget {
                         return FadeInAnimation(
                           milliseconds: 500,
                           child: RepaintBoundary(
-                            child: controller.pages[index],
+                            child: Center( /// Se centra desde esta parte para que las pantallas que se agreguen estén centradas por defecto.
+                              child: SingleChildScrollView( /// Este Widget impide que se modifique la pantalla cuando se abra el teclado virtual del celular.
+                                child: controller.pages[index],
+                              ),
+                            ),
                           ),
                         );
                       },

@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lingerie_store_project/views/signup/personal_data.dart';
 
+import '../models/user_model.dart';
+
 class ProgressController extends GetxController {
   var progress = 0.25.obs; // Observa cambios en el progreso
   var index = 0.obs;
@@ -66,13 +68,89 @@ class BackgroundAnimationController extends GetxController
     animationController.dispose();
     super.onClose();
   }
-
 }
 
 class PersonalDataFormController extends GetxController {
-  var nameController = TextEditingController();
-  var lastNameController = TextEditingController();
-  var birthdateController = TextEditingController();
-  var genderController = TextEditingController();
-  var gender = "".obs;
+  final nameController = TextEditingController();
+  final lastNameController = TextEditingController();
+  final birthdateController = TextEditingController();
+  final genderController = TextEditingController();
+
+  var name = ''.obs;
+  var lastName = ''.obs;
+  var birthDay = ''.obs;
+  var gender = ''.obs;
+
+  Rx<IconData> nameIcon = Icons.person_outline.obs;
+  Rx<IconData> lastNameIcon = Icons.person_outline.obs;
+  Rx<IconData> birthdateIcon = Icons.calendar_today_outlined.obs;
+
+  UserModel getUserData() {
+    DateTime? birthday;
+    try {
+      if (birthdateController.text.isNotEmpty) {
+        final parts = birthdateController.text.split('/');
+        birthday = DateTime(
+          int.parse(parts[2]), // año
+          int.parse(parts[1]), // mes
+          int.parse(parts[0]), // día
+        );
+      }
+    } catch (_) {
+      birthday = null;
+    }
+
+    return UserModel(
+      nameController.text.trim(),
+      lastNameController.text.trim(),
+      birthday,
+      gender.value,
+    );
+  }
+
+  // Validaciones
+  String? validateName(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      nameIcon.value = Icons.warning_amber_rounded;
+      return 'Campo obligatorio';
+    }
+    if (!RegExp(r"^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\s]+$").hasMatch(value)) {
+      nameIcon.value = Icons.warning_amber_rounded;
+      return 'Solo letras y espacios';
+    }
+    if (value.trim().length < 2) {
+      nameIcon.value = Icons.warning_amber_rounded;
+      return 'Mínimo 2 caracteres';
+    }
+    nameIcon.value = Icons.check_circle;
+    return null;
+  }
+
+  String? validateBirthdate(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      birthdateIcon.value = Icons.calendar_today_outlined;
+      return null;
+    }
+    try {
+      final parts = value.split('/');
+      final date = DateTime(
+        int.parse(parts[2]),
+        int.parse(parts[1]),
+        int.parse(parts[0]),
+      );
+      if (date.isAfter(DateTime.now())) {
+        birthdateIcon.value = Icons.warning_amber_rounded;
+        return 'No puede ser una fecha futura';
+      }
+      if (date.isBefore(DateTime(1900))) {
+        birthdateIcon.value = Icons.warning_amber_rounded;
+        return 'Fecha inválida';
+      }
+    } catch (_) {
+      birthdateIcon.value = Icons.warning_amber_rounded;
+      return 'Formato inválido';
+    }
+    birthdateIcon.value = Icons.check_circle;
+    return null;
+  }
 }

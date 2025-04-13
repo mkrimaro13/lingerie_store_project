@@ -13,6 +13,10 @@ class MainLayout extends StatelessWidget {
     // Recupera la instancia existente
     final controller = Get.put(MainLayoutController());
     return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 0,
+        elevation: 0,
+      ),
       body: PageView.builder(
         controller: controller.pageController,
         physics: BouncingScrollPhysics(),

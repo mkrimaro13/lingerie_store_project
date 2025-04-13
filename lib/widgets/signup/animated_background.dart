@@ -7,7 +7,8 @@ class AnimatedBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final BackgroundAnimationController controller = Get.put(BackgroundAnimationController());
+    final BackgroundAnimationController controller =
+        Get.put(BackgroundAnimationController());
 
     return AnimatedBuilder(
       animation: controller.animation,
@@ -15,7 +16,9 @@ class AnimatedBackground extends StatelessWidget {
         return Transform.translate(
           offset: controller.animation.value,
           child: Image.asset(
-            'lib/images/backgrounds/signup-background.webp',
+            Theme.of(context).brightness == Brightness.dark
+                ? 'lib/images/backgrounds/signup-background-darkmode.webp'
+                : 'lib/images/backgrounds/signup-background.webp',
             fit: BoxFit.cover,
           ),
         );

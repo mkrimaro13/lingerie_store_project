@@ -7,17 +7,19 @@ class PersonalDataView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: EdgeInsets.symmetric(horizontal: 24),
-        child: Column(
-            spacing: 16,
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                'Cuéntanos sobre ti :)',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-              PersonalDataForm(),
-            ]));
+      padding: EdgeInsets.symmetric(horizontal: 28),
+      child: Column(
+        spacing: 16,
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            'Cuéntanos sobre ti :)',
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          ),
+          PersonalDataForm(),
+        ],
+      ),
+    );
   }
 }
