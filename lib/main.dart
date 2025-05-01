@@ -6,9 +6,6 @@ import 'package:lingerie_store_project/layout/themes.dart';
 import 'package:lingerie_store_project/pages/loading.dart';
 
 void main() {
-  /// Se asegura que la aplicación halla iniciado
-  WidgetsFlutterBinding.ensureInitialized();
-
   /// Para Android:
   /// Establece el color de la barra superior y la barra virtual de los botones.
   SystemChrome.setSystemUIOverlayStyle(

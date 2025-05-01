@@ -38,7 +38,7 @@ dependencies:
   cached_network_image: ^3.4.1
   provider: ^6.1.2
   webp: ^1.0.0
-  get:
+  get: ^4.7.2
   keyboard_avoider: ^0.2.0
 
 dev_dependencies:

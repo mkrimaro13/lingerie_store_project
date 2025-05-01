@@ -85,6 +85,38 @@ class PersonalDataFormController extends GetxController {
   Rx<IconData> lastNameIcon = Icons.person_outline.obs;
   Rx<IconData> birthdateIcon = Icons.calendar_today_outlined.obs;
 
+  @override
+  void onInit() {
+    super.onInit();
+
+    name.value = nameController.text;
+    lastName.value = lastNameController.text;
+    birthDay.value = birthdateController.text;
+    gender.value = genderController.text;
+
+    nameController.addListener(() {
+      name.value = nameController.text;
+      validateName(name.value);
+      log('Nombre: ${name.value}\nÍcono: ${nameIcon.value} ');
+    });
+    lastNameController.addListener(() {
+      lastName.value = lastNameController.text;
+      validateLastName(lastName.value);
+      log('Apellido: ${lastName.value}\nÍcono: ${lastNameIcon.value} ');
+    });
+    birthdateController
+        .addListener(() => birthDay.value = birthdateController.text);
+    genderController.addListener(() => gender.value = genderController.text);
+  }
+
+  @override
+  void onClose() {
+    nameController.dispose();
+    lastNameController.dispose();
+    birthdateController.dispose();
+    super.dispose();
+  }
+
   UserModel getUserData() {
     DateTime? birthday;
     try {
@@ -126,9 +158,26 @@ class PersonalDataFormController extends GetxController {
     return null;
   }
 
+  String? validateLastName(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      lastNameIcon.value = Icons.warning_amber_rounded;
+      return 'Campo obligatorio';
+    }
+    if (!RegExp(r"^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\s]+$").hasMatch(value)) {
+      lastNameIcon.value = Icons.warning_amber_rounded;
+      return 'Solo letras y espacios';
+    }
+    if (value.trim().length < 2) {
+      lastNameIcon.value = Icons.warning_amber_rounded;
+      return 'Mínimo 2 caracteres';
+    }
+    lastNameIcon.value = Icons.check_circle;
+    return null;
+  }
+
   String? validateBirthdate(String? value) {
     if (value == null || value.trim().isEmpty) {
-      birthdateIcon.value = Icons.calendar_today_outlined;
+      birthdateIcon.value = Icons.calendar_month;
       return null;
     }
     try {
@@ -139,18 +188,18 @@ class PersonalDataFormController extends GetxController {
         int.parse(parts[0]),
       );
       if (date.isAfter(DateTime.now())) {
-        birthdateIcon.value = Icons.warning_amber_rounded;
+        // birthdateIcon.value = Icons.warning_amber_rounded;
         return 'No puede ser una fecha futura';
       }
       if (date.isBefore(DateTime(1900))) {
-        birthdateIcon.value = Icons.warning_amber_rounded;
+        // birthdateIcon.value = Icons.warning_amber_rounded;
         return 'Fecha inválida';
       }
     } catch (_) {
-      birthdateIcon.value = Icons.warning_amber_rounded;
+      // birthdateIcon.value = Icons.warning_amber_rounded;
       return 'Formato inválido';
     }
-    birthdateIcon.value = Icons.check_circle;
+    birthdateIcon.value = Icons.calendar_month;
     return null;
   }
 }

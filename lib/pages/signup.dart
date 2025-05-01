@@ -18,7 +18,8 @@ class SignupPage extends StatelessWidget {
         key: scaffoldKey,
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          toolbarHeight: 1,
+          toolbarHeight: 0,
+          elevation: 0,
         ),
         body: Stack(
           children: [
@@ -42,8 +43,10 @@ class SignupPage extends StatelessWidget {
                         return FadeInAnimation(
                           milliseconds: 500,
                           child: RepaintBoundary(
-                            child: Center( /// Se centra desde esta parte para que las pantallas que se agreguen estén centradas por defecto.
-                              child: SingleChildScrollView( /// Este Widget impide que se modifique la pantalla cuando se abra el teclado virtual del celular.
+                            child: Center(
+                              /// Se centra desde esta parte para que las pantallas que se agreguen estén centradas por defecto.
+                              child: SingleChildScrollView(
+                                /// Este Widget impide que se modifique la pantalla cuando se abra el teclado virtual del celular.
                                 child: controller.pages[index],
                               ),
                             ),

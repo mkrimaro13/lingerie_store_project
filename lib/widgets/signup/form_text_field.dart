@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class CustomTextField extends StatelessWidget {
   final String labelText;
@@ -7,11 +6,12 @@ class CustomTextField extends StatelessWidget {
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final TextEditingController controller;
-  final FormFieldValidator<String>? validator;  // Cambiar el tipo aquí
+  final FormFieldValidator<String>? validator;
   final bool? readOnly;
   final GestureTapCallback? onTap;
+  final void Function(String)? onChanged;
   final String? errorMessage;
-  final Rx<IconData> icon;  // Añadimos un campo para el ícono
+  final IconData icon;
 
   const CustomTextField({
     super.key,
@@ -23,39 +23,42 @@ class CustomTextField extends StatelessWidget {
     this.validator,
     this.readOnly,
     this.onTap,
+    this.onChanged,
     this.errorMessage,
-    required this.icon, // Recibimos el ícono dinámico
+    required this.icon,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() {
-      return TextFormField(
-        onTap: onTap ?? () {},
-        controller: controller,
-        readOnly: readOnly ?? false,
-        decoration: InputDecoration(
-          labelText: labelText,
-          hintText: hintText,
-          prefixIcon: prefixIcon ?? Icon(Icons.person),
-          suffixIcon: errorMessage == null
-              ? Icon(icon.value)  // Cambiamos el ícono dependiendo de la validez
-              : Icon(icon.value, color: Colors.amber), // Icono de advertencia
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide(color: AppBarTheme.of(context).shadowColor!),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide(color: Colors.deepPurple, width: 2),
-          ),
-          filled: true,
-          fillColor: Theme.of(context).appBarTheme.backgroundColor,
+    return TextFormField(
+      onTap: onTap ?? () {},
+      onChanged: onChanged ?? (value) {},
+      controller: controller,
+      readOnly: readOnly ?? false,
+      decoration: InputDecoration(
+        labelText: labelText,
+        hintText: hintText,
+        prefixIcon: prefixIcon ?? Icon(Icons.person),
+        suffixIcon: errorMessage == null
+            ? Icon(
+                icon,
+                color: Colors.blueAccent,
+              ) // Se cambia el ícono de forma reactiva dependiendo si el valor en el campo es válido
+            : Icon(icon, color: Colors.amber), // Icono de advertencia
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: AppBarTheme.of(context).shadowColor!),
         ),
-        style: TextStyle(
-            fontSize: 18, color: Theme.of(context).appBarTheme.foregroundColor),
-        validator: validator, // Cambiar a validator
-      );
-    });
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: Colors.deepPurple, width: 2),
+        ),
+        filled: true,
+        fillColor: Theme.of(context).appBarTheme.backgroundColor,
+      ),
+      style: TextStyle(
+          fontSize: 18, color: Theme.of(context).appBarTheme.foregroundColor),
+      validator: validator,
+    );
   }
 }

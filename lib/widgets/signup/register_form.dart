@@ -3,7 +3,6 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:keyboard_avoider/keyboard_avoider.dart';
 import 'package:lingerie_store_project/controllers/signup.dart';
 import 'package:lingerie_store_project/widgets/buttons/extended.dart';
 import 'package:lingerie_store_project/widgets/signup/form_text_field.dart';
@@ -42,33 +41,39 @@ class _PersonalDataFormState extends State<PersonalDataForm> {
 
     return Form(
       key: formKey,
-      child: KeyboardAvoider(
+      child: SingleChildScrollView(
+        physics: NeverScrollableScrollPhysics(),
         child: Column(
           spacing: 8,
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            CustomTextField(
-              key: textFieldKey,
-              controller: controller.nameController,
-              validator: controller
-                  .validateName, // Llamamos al controlador para la validación
-              labelText: "Nombres",
-              hintText: "Ingresa tu nombre",
-              icon: controller.nameIcon, // Pasamos el ícono dinámico
-              errorMessage:
-                  controller.validateName(controller.nameController.text),
-            ),
-            CustomTextField(
-              controller: controller.lastNameController,
-              validator: controller
-                  .validateName, // Llamamos al controlador para la validación
-              labelText: "Apellidos",
-              hintText: "Apellidos",
-              icon: controller.lastNameIcon, // Pasamos el ícono dinámico
-              errorMessage:
-                  controller.validateName(controller.lastNameController.text),
-            ),
+            Obx(() {
+              return CustomTextField(
+                key: textFieldKey,
+                controller: controller.nameController,
+                validator: controller
+                    .validateName, // Llamamos al controlador para la validación
+                labelText: "Nombres",
+                hintText: "Ingresa tu nombre",
+                icon: controller.nameIcon.value, // Pasamos el ícono dinámico
+                errorMessage:
+                    controller.validateName(controller.nameController.text),
+              );
+            }),
+            Obx(() {
+              return CustomTextField(
+                controller: controller.lastNameController,
+                validator: controller
+                    .validateLastName, // Llamamos al controlador para la validación
+                labelText: "Apellidos",
+                hintText: "Ingresa tu apellido",
+                icon:
+                    controller.lastNameIcon.value, // Pasamos el ícono dinámico
+                errorMessage: controller
+                    .validateLastName(controller.lastNameController.text),
+              );
+            }),
             CustomTextField(
               controller: controller.birthdateController,
               validator: controller
@@ -85,9 +90,10 @@ class _PersonalDataFormState extends State<PersonalDataForm> {
                 );
                 controller.birthdateController.text = pickedDate != null
                     ? "${pickedDate.day}/${pickedDate.month}/${pickedDate.year}"
-                    : "No haz seleccionado ninguna fecha";
+                    : "";
+                log(controller.birthdateController.text);
               },
-              icon: controller.birthdateIcon, // Pasamos el ícono dinámico
+              icon: controller.birthdateIcon.value, // Pasamos el ícono dinámico
               errorMessage: controller
                   .validateBirthdate(controller.birthdateController.text),
             ),
@@ -139,7 +145,11 @@ class _PersonalDataFormState extends State<PersonalDataForm> {
                 ExtendedButton(
                   buttonLabel: "Continuar",
                   onPressed: () {
-                    if (formKey.currentState!.validate()) {
+                    if (controller.name.value.isEmpty ||
+                        controller.lastName.value.isEmpty) {
+                      Get.snackbar("Información incompleta",
+                          "Por favor completa la información requerida");
+                    } else if (formKey.currentState!.validate()) {
                       final user = controller.getUserData();
                       log("Nombre: ${user.name}");
                       log("Apellido: ${user.lastName}");
