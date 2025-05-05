@@ -70,6 +70,10 @@ class _ContactInformationFormState extends State<ContactInformationForm> {
                       showSnackBar("Información incompleta",
                           "Por favor completa la información requerida",context,const Duration(seconds: 2));
                     } else if (formKey.currentState!.validate()) {
+                      Get.find<UserDataSignupController>().updateContactData(
+                        controller.email.value,
+                        controller.phone.value,
+                      );
                       showSnackBar(
                           "Registro Exitoso", "Datos guardados correctamente",context,null);
                       progressController.updateProgress(2);
@@ -100,8 +104,8 @@ class ContactFormControler extends GetxController {
   Rx<String> email = ''.obs;
   Rx<String> phone = ''.obs;
 
-  TextEditingController emailController = TextEditingController();
-  TextEditingController phoneController = TextEditingController();
+  TextEditingController emailController = TextEditingController(text: "");
+  TextEditingController phoneController = TextEditingController(text: "");
 
   @override
   void onInit() {

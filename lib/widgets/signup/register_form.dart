@@ -163,11 +163,27 @@ class _PersonalDataFormState extends State<PersonalDataForm> {
                           context,
                           const Duration(seconds: 2));
                     } else if (formKey.currentState!.validate()) {
-                      // final user = controller.getUserData();
-                      // log("Nombre: ${user.name}");
-                      // log("Apellido: ${user.lastName}");
-                      // log("Nacimiento: ${user.birthDay}");
-                      // log("Género: ${user.genre}");
+                      DateTime? parsedBirthDate;
+                      if (controller.birthDay.value.isNotEmpty) {
+                        try {
+                          final parts = controller.birthDay.value.split('/');
+                          final day = int.parse(parts[0]);
+                          final month = int.parse(parts[1]);
+                          final year = int.parse(parts[2]);
+                          parsedBirthDate = DateTime(year, month, day);
+                        } catch (e) {
+                          log('Error al parsear la fecha: $e');
+                          parsedBirthDate =
+                              null; // O podrías mostrar un error al usuario
+                        }
+                      }
+
+                      Get.find<UserDataSignupController>().updatePersonalData(
+                        controller.name.value,
+                        controller.lastName.value,
+                        parsedBirthDate, // Usamos la fecha parseada
+                        controller.gender.value,
+                      );
 
                       showSnackBar("Registro Exitoso",
                           "Datos guardados correctamente", context, null);
@@ -228,8 +244,9 @@ class PersonalDataFormController extends GetxController {
   Rx<String> birthDay = ''.obs;
   Rx<String> gender = ''.obs;
 
-  TextEditingController nameController = TextEditingController();
-  TextEditingController lastNameController = TextEditingController();
+  TextEditingController nameController = TextEditingController(text: "");
+  TextEditingController lastNameController =
+      TextEditingController(text: "");
   TextEditingController birthdateController = TextEditingController();
   TextEditingController genderController = TextEditingController();
 
@@ -274,30 +291,6 @@ class PersonalDataFormController extends GetxController {
     lastNameController.dispose();
     birthdateController.dispose();
     super.dispose();
-  }
-
-  // UserModel getUserData() {
-  void getUserData() {
-    DateTime? birthday;
-    try {
-      if (birthdateController.text.isNotEmpty) {
-        final parts = birthdateController.text.split('/');
-        birthday = DateTime(
-          int.parse(parts[2]), // año
-          int.parse(parts[1]), // mes
-          int.parse(parts[0]), // día
-        );
-      }
-    } catch (_) {
-      birthday = null;
-    }
-
-    // return UserModel(
-    //   nameController.text.trim(),
-    //   lastNameController.text.trim(),
-    //   birthday,
-    //   gender.value,
-    // );
   }
 
   // Validaciones

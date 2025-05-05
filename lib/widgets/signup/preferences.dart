@@ -68,15 +68,30 @@ class Preferences extends StatelessWidget {
             ExtendedButton(
               buttonLabel: 'Volver',
               onPressed: () {
-                progressController.updateProgress(0);
+                progressController.updateProgress(2);
               },
             ),
             ExtendedButton(
-                buttonLabel: "Continuar",
+                buttonLabel: "Finalizar",
                 onPressed: () {
-                  showSnackBar("Registro Exitoso",
-                      "Datos guardados correctamente", context, null);
-                  progressController.updateProgress(0);
+                  if (controller.selectedInterests.isEmpty) {
+                    showSnackBar(
+                        "Información incompleta",
+                        "Por favor selecciona al menos una categoría de interés",
+                        context,
+                        const Duration(seconds: 2));
+                    return;
+                  } else {
+                    Get.find<UserDataSignupController>().updateInterests(
+                      controller.getSelectedCategories(),
+                    );
+                    Get.find<UserDataSignupController>().submitForm();
+                    showSnackBar("Registro Exitoso",
+                        "Datos guardados correctamente", context, null);
+                    Get.until(
+                        (route) => Get.currentRoute == "/RepaintBoundary");
+                    // Get.delete();
+                  }
                 }),
           ],
         ),

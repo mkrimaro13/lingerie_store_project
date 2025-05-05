@@ -48,7 +48,7 @@ class AcceptanceTerms extends StatelessWidget {
             ExtendedButton(
               buttonLabel: 'Volver',
               onPressed: () {
-                progressController.updateProgress(0);
+                progressController.updateProgress(1);
               },
             ),
             ExtendedButton(
@@ -62,6 +62,11 @@ class AcceptanceTerms extends StatelessWidget {
                       context,
                       const Duration(seconds: 2));
                 } else {
+                  Get.find<UserDataSignupController>().updateTerms(
+                    controller.acceptPromotions.value,
+                    controller.acceptPrivacyPolicy.value,
+                    controller.acceptTerms.value,
+                  );
                   showSnackBar("Registro Exitoso",
                       "Datos guardados correctamente", context, null);
                   progressController.updateProgress(3);

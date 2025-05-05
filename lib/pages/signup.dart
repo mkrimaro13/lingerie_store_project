@@ -11,6 +11,7 @@ class SignupPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(UserDataSignupController());
     final scaffoldKey = GlobalKey<ScaffoldState>();
     return GetBuilder<ProgressController>(
       init: ProgressController(),
