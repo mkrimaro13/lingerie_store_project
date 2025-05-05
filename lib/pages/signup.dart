@@ -27,37 +27,30 @@ class SignupPage extends StatelessWidget {
               child:
                   AnimatedBackground(), // Asegura que el fondo cubra toda la pantalla
             ),
-            SafeArea(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  ProgressBar(controller: controller),
-                  Expanded(
-                    // Se agrega Expanded para restringir el tamaño
-                    child: PageView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      controller: controller.pageController,
-                      itemCount: controller.pages.length,
-                      itemBuilder: (context, index) {
-                        return FadeInAnimation(
-                          milliseconds: 500,
-                          child: RepaintBoundary(
-                            child: Center(
-                              /// Se centra desde esta parte para que las pantallas que se agreguen estén centradas por defecto.
-                              child: SingleChildScrollView(
-                                /// Este Widget impide que se modifique la pantalla cuando se abra el teclado virtual del celular.
-                                child: controller.pages[index],
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                ProgressBar(controller: controller),
+                Expanded(
+                  // Se agrega Expanded para restringir el tamaño
+                  child: PageView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    controller: controller.pageController,
+                    itemCount: controller.pages.length,
+                    itemBuilder: (context, index) {
+                      return FadeInAnimation(
+                        milliseconds: 500,
+                        child: Center(
+                          child: controller.pages[index],
+                        ),
+                      );
+                    },
                   ),
-                  BottomBar(controller: controller)
-                ],
-              ),
+                ),
+                BottomBar(controller: controller)
+              ],
             ),
           ],
         ),

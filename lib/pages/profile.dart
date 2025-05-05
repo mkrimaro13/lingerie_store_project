@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lingerie_store_project/pages/signin.dart';
 import 'package:lingerie_store_project/pages/signup.dart';
 import 'package:lingerie_store_project/widgets/buttons/extended.dart';
 
@@ -31,7 +32,7 @@ class ProfilePage extends StatelessWidget {
             text: "Iniciar Sesión",
             color: Colors.deepPurpleAccent[100]!,
             onPressed: () {
-              // Navegación a pantalla de login (a implementar)
+              Get.to(() => SigninPage());
             },
           ),
           _buildButton(

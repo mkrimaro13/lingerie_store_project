@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,57 +15,35 @@ class BottomBar extends StatelessWidget {
         height: 72,
         decoration: decoration(context),
         child: Row(
-          spacing: 8,
+          spacing: 0,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            IconButton(
-              icon: Icon(Icons.face),
-              onPressed: () {
-                controller.updateProgress(0);
-                log(controller.progress.value.toString());
-                log('face pressed');
-              },
+            Icon(Icons.face),
+            Obx(
+              () => Icon(
+                  controller.index.value == 1 || controller.index.value >= 1
+                      ? Icons.mark_email_read_rounded
+                      : Icons.mail_rounded),
             ),
-            Obx(() => IconButton(
-                  icon: Icon(
-                      controller.index.value == 1 || controller.index.value >= 1
-                          ? Icons.mark_email_read_rounded
-                          : Icons.mail_rounded),
-                  onPressed: () {
-                    controller.updateProgress(1);
-                    log(controller.progress.value.toString());
-                    log('mail_rounded pressed');
-                  },
-                )),
-            Obx(() => IconButton(
-                  icon: Icon(
-                      controller.index.value == 2 || controller.index.value >= 2
-                          ? Icons.check_box_rounded
-                          : Icons.check_box_outline_blank_rounded),
-                  onPressed: () {
-                    controller.updateProgress(2);
-                    log(controller.progress.value.toString());
-                    log('favorite_outline_rounded pressed');
-                  },
-                )),
-            Obx(() => IconButton(
-                  icon: Icon(
-                      controller.index.value == 3 || controller.index.value >= 3
-                          ? Icons.favorite_rounded
-                          : Icons.favorite_outline_rounded),
-                  onPressed: () {
-                    controller.updateProgress(3);
-                    log(controller.progress.value.toString());
-                    log('favorite_outline_rounded pressed');
-                  },
-                )),
+            Obx(
+              () => Icon(
+                  controller.index.value == 2 || controller.index.value >= 2
+                      ? Icons.check_box_rounded
+                      : Icons.check_box_outline_blank_rounded),
+            ),
+            Obx(
+              () => Icon(
+                controller.index.value == 3 || controller.index.value >= 3
+                    ? Icons.favorite_rounded
+                    : Icons.favorite_outline_rounded,
+              ),
+            ),
           ],
         ));
   }
-
-
 }
+
 BoxDecoration decoration(BuildContext context) {
   return BoxDecoration(
     borderRadius: BorderRadius.vertical(top: Radius.circular(16)),

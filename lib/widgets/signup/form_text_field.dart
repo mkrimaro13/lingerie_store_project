@@ -11,7 +11,7 @@ class CustomTextField extends StatelessWidget {
   final GestureTapCallback? onTap;
   final void Function(String)? onChanged;
   final String? errorMessage;
-  final IconData icon;
+  final Icon? icon;
 
   const CustomTextField({
     super.key,
@@ -25,7 +25,7 @@ class CustomTextField extends StatelessWidget {
     this.onTap,
     this.onChanged,
     this.errorMessage,
-    required this.icon,
+    this.icon,
   });
 
   @override
@@ -39,12 +39,7 @@ class CustomTextField extends StatelessWidget {
         labelText: labelText,
         hintText: hintText,
         prefixIcon: prefixIcon ?? Icon(Icons.person),
-        suffixIcon: errorMessage == null
-            ? Icon(
-                icon,
-                color: Colors.blueAccent,
-              ) // Se cambia el ícono de forma reactiva dependiendo si el valor en el campo es válido
-            : Icon(icon, color: Colors.amber), // Icono de advertencia
+        suffixIcon: suffixIcon,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide(color: AppBarTheme.of(context).shadowColor!),

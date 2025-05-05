@@ -69,5 +69,21 @@ ThemeData appTheme(Brightness brightness, ThemeColors colors) {
       color: colors.text,
       size: 24,
     ),
+    checkboxTheme: CheckboxThemeData(
+      fillColor:
+          WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+        if (states.contains(WidgetState.selected)) {
+          return colors.secondary; // Color de fondo cuando está seleccionado
+        }
+        return colors
+            .accent; // Color de fondo cuando no está seleccionado (contraste suave)
+      }),
+      checkColor: WidgetStatePropertyAll(colors.text), // Color del check
+      side: BorderSide(color: colors.border, width: 1.5), // Estilo del borde
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(5)), // Forma redondeada
+      visualDensity:
+          VisualDensity.adaptivePlatformDensity, // Densidad visual adaptativa
+    ),
   );
 }
