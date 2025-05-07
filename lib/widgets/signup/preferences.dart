@@ -5,6 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:lingerie_store_project/controllers/signup.dart';
 import 'package:lingerie_store_project/models/user_model.dart';
 import 'package:lingerie_store_project/widgets/buttons/extended.dart';
+import 'package:lingerie_store_project/widgets/signup/contact_form.dart';
+import 'package:lingerie_store_project/widgets/signup/register_form.dart';
+import 'package:lingerie_store_project/widgets/signup/terms.dart';
 
 class Preferences extends StatelessWidget {
   final PreferencesController controller = Get.put(PreferencesController());
@@ -88,9 +91,12 @@ class Preferences extends StatelessWidget {
                     Get.find<UserDataSignupController>().submitForm();
                     showSnackBar("Registro Exitoso",
                         "Datos guardados correctamente", context, null);
-                    Get.until(
-                        (route) => Get.currentRoute == "/RepaintBoundary");
-                    // Get.delete();
+                    Get.offAllNamed("/home", parameters: {'initialIndex': '2'});
+                    Get.delete<PreferencesController>();
+                    Get.delete<PersonalDataFormController>();
+                    Get.delete<ContactFormControler>();
+                    Get.delete<AcceptanceTermController>();
+                    Get.delete<ProgressController>();
                   }
                 }),
           ],

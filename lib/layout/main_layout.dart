@@ -6,29 +6,30 @@ import 'package:lingerie_store_project/layout/background.dart';
 import 'package:lingerie_store_project/widgets/main_layout/navigation_bar.dart';
 
 class MainLayout extends StatelessWidget {
-  const MainLayout({super.key});
+  final int? initialIndex;
+
+  const MainLayout({super.key, this.initialIndex});
 
   @override
   Widget build(BuildContext context) {
-    // Recupera la instancia existente
-    final controller = Get.put(MainLayoutController());
+    final controller = Get.find<MainLayoutController>();
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 0,
         elevation: 0,
       ),
-      body: PageView.builder(
-        controller: controller.pageController,
-        physics: BouncingScrollPhysics(),
-        itemCount: controller.pages.length,
-        itemBuilder: (context, index) {
-          return FadeInAnimation(
-            milliseconds: 500,
-            child: RepaintBoundary(
+      body: RepaintBoundary(
+        child: PageView.builder(
+          controller: controller.pageController,
+          physics: NeverScrollableScrollPhysics(),
+          itemCount: controller.pages.length,
+          itemBuilder: (context, index) {
+            return FadeInAnimation(
+              milliseconds: 500,
               child: SpecialBackground(child: controller.pages[index]),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
 
       ///Para habilitar la actualización de la barra inferior

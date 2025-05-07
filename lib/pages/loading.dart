@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lingerie_store_project/layout/main_layout.dart';
 
 class LoadingPage extends StatefulWidget {
   const LoadingPage({super.key});
@@ -18,7 +17,7 @@ class LoadingPageState extends State<LoadingPage> {
       /// `Get.off()` permite ir a una página siguiente, sin posibilidad de
       /// volver hacía atrás
       if (mounted) {
-        Get.off(() => RepaintBoundary(child:const MainLayout()));
+        Get.offNamed("/home");
       }
       // Get.off(() => RepaintBoundary(child: const MainLayout()));
     });

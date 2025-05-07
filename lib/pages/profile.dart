@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lingerie_store_project/models/user_model.dart';
 import 'package:lingerie_store_project/pages/signin.dart';
-import 'package:lingerie_store_project/pages/signup.dart';
 import 'package:lingerie_store_project/widgets/buttons/extended.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -48,7 +47,7 @@ class ProfilePage extends StatelessWidget {
             text: "Crear Cuenta",
             color: Colors.blueAccent[100]!,
             onPressed: () {
-              Get.to(() => SignupPage());
+              Get.toNamed("/signup");
             },
           ),
         ],
@@ -75,8 +74,8 @@ class ProfilePage extends StatelessWidget {
   Widget _login(BuildContext context, UserModel user) {
     return Column(
       spacing: 8,
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Row(
             spacing: 8,

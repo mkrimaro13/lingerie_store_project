@@ -11,7 +11,6 @@ class CustomTextField extends StatelessWidget {
   final GestureTapCallback? onTap;
   final void Function(String)? onChanged;
   final String? errorMessage;
-  final Icon? icon;
 
   const CustomTextField({
     super.key,
@@ -25,7 +24,6 @@ class CustomTextField extends StatelessWidget {
     this.onTap,
     this.onChanged,
     this.errorMessage,
-    this.icon,
   });
 
   @override

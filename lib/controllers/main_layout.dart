@@ -6,41 +6,39 @@ import 'package:lingerie_store_project/pages/products.dart';
 import 'package:lingerie_store_project/pages/profile.dart';
 
 class MainLayoutController extends GetxController {
+  late final PageController pageController;
   var selectedIndex = 0.obs;
-  final PageController pageController = PageController();
-  static MainLayoutController get init => Get.put(MainLayoutController());
+  final int initialIndex;
 
   final List<Widget> pages = [
-    // HomePage(),
     ProductsPage(),
     ProductsCartPage(),
     ProfilePage(),
   ];
 
-  void onItemTapped(int index) {
-    selectedIndex.value = index;
-    pageController.jumpToPage(index);
-    // update();
-  }
+  MainLayoutController({this.initialIndex = 0});
 
   @override
   void onInit() {
     super.onInit();
-
-    // Escuchar el cambio de página
+    selectedIndex.value = initialIndex;
+    pageController = PageController(initialPage: initialIndex);
     pageController.addListener(() {
       final currentPage = pageController.page?.round() ?? 0;
-
-      // Solo actualiza si el índice cambia
       if (selectedIndex.value != currentPage) {
         selectedIndex.value = currentPage;
       }
     });
   }
 
+  void onItemTapped(int index) {
+    selectedIndex.value = index;
+    pageController.jumpToPage(index);
+  }
+
   @override
   void onClose() {
-    pageController.dispose(); // Evita fugas de memoria
+    pageController.dispose();
     super.onClose();
   }
 }

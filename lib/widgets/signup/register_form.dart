@@ -102,7 +102,6 @@ class _PersonalDataFormState extends State<PersonalDataForm> {
                     : "";
                 log(controller.birthdateController.text);
               },
-              icon: controller.birthdateIcon.value, // Pasamos el ícono dinámico
               errorMessage: controller
                   .validateBirthdate(controller.birthdateController.text),
             ),
@@ -244,9 +243,9 @@ class PersonalDataFormController extends GetxController {
   Rx<String> birthDay = ''.obs;
   Rx<String> gender = ''.obs;
 
-  TextEditingController nameController = TextEditingController(text: "");
+  TextEditingController nameController = TextEditingController(text: "Manuela");
   TextEditingController lastNameController =
-      TextEditingController(text: "");
+      TextEditingController(text: "Lopera");
   TextEditingController birthdateController = TextEditingController();
   TextEditingController genderController = TextEditingController();
 
