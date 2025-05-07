@@ -346,29 +346,26 @@ class PersonalDataFormController extends GetxController {
         int.parse(parts[1]),
         int.parse(parts[0]),
       );
-      if (date.isAfter(DateTime.now())) {
-        birthdateIcon.value = Icon(
-          Icons.priority_high_rounded,
-          color: Colors.redAccent,
-        );
+      final now = DateTime.now();
+      final minDate = DateTime(1900);
+      final minAllowed = DateTime(now.year - 16, now.month, now.day);
+
+      if (date.isAfter(now)) {
+        birthdateIcon.value = warningIcon;
         return 'No puede ser una fecha futura';
       }
-      if (date.isBefore(DateTime(1900))) {
-        birthdateIcon.value = Icon(
-          Icons.priority_high_rounded,
-          color: Colors.redAccent,
-        );
+      if (date.isBefore(minDate)) {
+        birthdateIcon.value = warningIcon;
         return 'Fecha inválida';
       }
-      // if(date.is)
+      if (date.isAfter(minAllowed)) {
+        birthdateIcon.value = warningIcon;
+        return 'Debes tener al menos 16 años';
+      }
     } catch (_) {
-      // birthdateIcon.value = Icons.warning_amber_rounded;
       return 'Formato inválido';
     }
-    birthdateIcon.value = Icon(
-      Icons.calendar_month,
-      color: Colors.lightBlue,
-    );
+    birthdateIcon.value = checkIcon;
     return null;
   }
 }
